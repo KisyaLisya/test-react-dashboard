@@ -1,0 +1,50 @@
+
+@import "../../styles/variables.less";
+@import "../../styles/mixins.less";
+
+.CheckboxSelector {
+
+  position: relative;
+  width: 1rem;
+  height: 1rem;
+
+  &-input {
+    .visually-hidden;
+
+    &:focus + span {
+      box-shadow: 0 0 0 0.2rem rgba(120,194,173,0.25);
+    }
+
+    &:checked + span {
+      color: @white;
+
+      background: no-repeat 55% 55%;
+      background-size: 57%;
+      background-image: @checkboxArrow;
+      background-color: @mint;
+      border-color: @mint;
+    }
+
+  }
+
+  &-box {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    display: block;
+
+    width: 1rem;
+    height: 1rem;
+
+    background-color: @white;
+
+    border: @gray solid 1px;
+    border-radius: 0.4rem;
+
+    transition:
+      background-color 0.15s ease-in-out,
+      border-color 0.15s ease-in-out,
+      box-shadow 0.15s ease-in-out;
+  }
+}
