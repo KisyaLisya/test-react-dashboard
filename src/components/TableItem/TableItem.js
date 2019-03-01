@@ -1,50 +1,53 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
+import { toggleTask } from '../../store/actions';
 
-import { makeClass } from '../../active/Utils';
 import './TableItem.less';
 
-import { toggleTask } from '../../store/actions';
+import ActionButton from '../ActionButton';
+import Badge from '../Badge';
+
 
 const TableItem = ({ className = '', data, actions, toggleTask }) => {
 	const {
 		id,
-		checked = false,
+		createdAt = 'unknown',
 		status = false,
 		task,
-		assignee
+		priority
 	} = data;
 	const { editAction, deleteAction } = actions;
 
 	return(
 		<tr
-			key={id}
 			className={className}
 		>
 			<td>
-				{status}
+				{createdAt[1]}
+			</td>
+			<td>
+				{priority}
+			</td>
+			<td>
+				<Badge
+					type={status}
+					value={`${status[0].toUpperCase()}${status.slice(1)}`}
+				/>
 			</td>
 			<td>
 				{task}
 			</td>
 			<td>
-				{assignee}
-			</td>
-			<td>
-				<button
-					type="button"
-					className="btn btn-outline-info btn-sm"
+				<ActionButton
+					className="btn-outline-info mr-1"
+					icon="fa-pencil"
 					onClick={() => editAction(id)}
-				>
-					<i className="fa fa-pencil"></i>
-				</button>
-				<button
-					type="button"
-					className="btn btn-outline-danger btn-sm"
-					onClick={() => deleteAction(id)}
-				>
-					<i className="fa fa-trash-o"></i>
-				</button>
+				/>
+				<ActionButton
+					className="btn-outline-danger"
+					icon="fa-trash-o"
+					onClick={() => editAction(id)}
+				/>
 			</td>
 		</tr>
 	);

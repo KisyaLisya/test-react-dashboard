@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 
 import './Table.less';
 
-import { getTasks } from '../../store/selectors';
+import { sortTasks } from '../../store/selectors';
 
 import TableItem from '../TableItem';
 
@@ -33,9 +33,10 @@ class Table extends Component {
 			>
 				<thead>
 					<tr>
+						<th title="Status">Created Date</th>
+						<th title="Status">Priority</th>
 						<th title="Status">Status</th>
 						<th title="Task">Task</th>
-						<th title="Assignee">Assignee</th>
 						<th title="Actions">Actions</th>
 					</tr>
 				</thead>
@@ -49,7 +50,9 @@ class Table extends Component {
 
 const mapStateToProps = state => {
 	return {
-		data: getTasks(state)
+		data: sortTasks(
+			state
+		)
 	}
 }
 

@@ -4,19 +4,22 @@ const initialState = {
   allIds: [0, 1, 2],
   byIds: {
     '0': {
-      status: false,
+      status: 'done',
+			priority: 'Major',
+			createdAt: [20180913, '13 Sept 2018'],
       task: 'Task 1 desription',
-      assignee: 'Assignee_Name'
     },
     '1': {
-      status: false,
+      status: 'todo',
+			priority: 'Major',
+			createdAt: [20180911, '11 Sept 2018'],
       task: 'Task 2 desription',
-      assignee: 'Assignee_Name'
     },
     '2': {
-      status: false,
+      status: 'in progress',
+			priority: 'Minor',
+			createdAt: [20180912, '12 Sept 2018'],
       task: 'Task 3 desription',
-      assignee: 'Assignee_Name'
     }
   }
 }
