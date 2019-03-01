@@ -45,6 +45,7 @@ export const sortTasks = (tasks, sortOptions) => {
 			aVal: Array.isArray(aVal) ? aVal[0] : aVal,
 			bVal: Array.isArray(bVal) ? bVal[0] : bVal
 		};
+    console.log(sortProps);
 
 		if (sortOptions.type) {
 			return sortUp(sortProps);

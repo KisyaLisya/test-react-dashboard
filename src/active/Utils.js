@@ -13,7 +13,7 @@ export const makeActionToId = (id, actionFunc) => {
 
 export const sortUp = ({aVal, bVal, aId, bId, local = false}) => {
 	if (aVal === bVal) {
-		return aId < bId ? 1 : -1;
+		return aId > bId ? 1 : -1;
 	}
 
 	if (local) {
