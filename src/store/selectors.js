@@ -23,13 +23,23 @@ export const filterTasks = (store, filterFunc) => {
 	return getTasks(store).filter((el) => filterFunc(el));
 }
 
-export const sortTasks = (store, options = {}) => {
-	const { sortType = 'up', sortName = 'createdAt', isString = false } = options;
+export const getSortOptions = (store) => {
+  return store.sortTasks;
+}
+
+export const sortTasks = (store) => {
+	const sortOptions = getSortOptions(store);
 	const tasks = getTasks(store);
 
 	return tasks.sort((a, b) => {
-		let aVal = a[sortName];
-		let bVal = b[sortName];
+		let aVal = a[sortOptions.id];
+		let bVal = b[sortOptions.id];
+    const isString = typeof aVal === 'string' || typeof bVal === 'string';
+
+    if (isString) {
+      aVal = aVal.toString();
+      bVal = bVal.toString();
+    }
 
 		const sortProps = {
 			local: isString,
@@ -39,7 +49,7 @@ export const sortTasks = (store, options = {}) => {
 			bVal: Array.isArray(bVal) ? bVal[0] : bVal
 		};
 
-		if (sortType === 'up') {
+		if (sortOptions.type) {
 			return sortUp(sortProps);
 		} else {
 			return sortDown(sortProps);

@@ -3,15 +3,20 @@ import { connect } from "react-redux";
 
 import './Table.less';
 
-import { sortTasks } from '../../store/selectors';
+import { sortTasks, getSortOptions } from '../../store/selectors';
+import { toggleSortType } from '../../store/actions';
 
+import TableHeadItem from '../TableHeadItem';
 import TableItem from '../TableItem';
 
 class Table extends Component {
 
 	render() {
-		const { data = [] } = this.props;
-
+		const { data = [], sortOptions = {}, toggleSortType } = this.props;
+		// console.log(this.props);
+		// const { data = [] } = this.props;
+		// const sortOptions = {};
+		// const toggleSortType = (a, b) => console.log(a, b);
 		const items = data.map((el) => {
 			const actions = {
 				editAction: (id) => console.log(id),
@@ -25,7 +30,7 @@ class Table extends Component {
 					actions={actions}
 				/>
 			)
-		})
+		});
 
 		return(
 			<table
@@ -33,11 +38,40 @@ class Table extends Component {
 			>
 				<thead>
 					<tr>
-						<th title="Status">Created Date</th>
-						<th title="Status">Priority</th>
-						<th title="Status">Status</th>
-						<th title="Task">Task</th>
-						<th title="Actions">Actions</th>
+						<TableHeadItem
+							id="createdAt"
+							className="Table-head-item align-middle _w150"
+							value="Created Date"
+							sort={sortOptions}
+							onSort={toggleSortType}
+						/>
+						<TableHeadItem
+							id="priority"
+							className="Table-head-item align-middle _w100"
+							value="Priority"
+							sort={sortOptions}
+							onSort={toggleSortType}
+						/>
+						<TableHeadItem
+							id="status"
+							className="Table-head-item align-middle _w75"
+							value="Status"
+							sort={sortOptions}
+							onSort={toggleSortType}
+						/>
+						<TableHeadItem
+							id="task"
+							className="Table-head-item align-middle"
+							value="Task"
+							sort={sortOptions}
+							onSort={toggleSortType}
+						/>
+						<TableHeadItem
+							id="actions"
+							className="align-middle _w125"
+							value="Actions"
+							noSort
+						/>
 					</tr>
 				</thead>
 				<tbody>
@@ -50,10 +84,12 @@ class Table extends Component {
 
 const mapStateToProps = state => {
 	return {
-		data: sortTasks(
-			state
-		)
+		data: sortTasks(state),
+		sortOptions: getSortOptions(state)
 	}
 }
 
-export default connect(mapStateToProps)(Table);
+export default connect(
+	mapStateToProps,
+	{ toggleSortType }
+)(Table);

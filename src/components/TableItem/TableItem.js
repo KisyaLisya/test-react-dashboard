@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { toggleTask } from '../../store/actions';
 
+import { makeWordFromId } from '../../active/Utils';
 import './TableItem.less';
 
 import ActionButton from '../ActionButton';
@@ -12,32 +13,37 @@ const TableItem = ({ className = '', data, actions, toggleTask }) => {
 	const {
 		id,
 		createdAt = 'unknown',
-		status = false,
+		status = [0, 'todo'],
 		task,
 		priority
 	} = data;
 	const { editAction, deleteAction } = actions;
+	const [, statusType] = status;
+	const statusName = statusType
+		.split(' ')
+		.map((w) => makeWordFromId(w))
+		.join(' ');
 
 	return(
 		<tr
 			className={className}
 		>
-			<td>
+			<td className="align-middle">
 				{createdAt[1]}
 			</td>
-			<td>
-				{priority}
+			<td className="align-middle">
+				{makeWordFromId(priority[1])}
 			</td>
-			<td>
+			<td className="align-middle">
 				<Badge
-					type={status}
-					value={`${status[0].toUpperCase()}${status.slice(1)}`}
+					type={statusType}
+					value={statusName}
 				/>
 			</td>
-			<td>
+			<td className="align-middle">
 				{task}
 			</td>
-			<td>
+			<td className="align-middle">
 				<ActionButton
 					className="btn-outline-info mr-1"
 					icon="fa-pencil"

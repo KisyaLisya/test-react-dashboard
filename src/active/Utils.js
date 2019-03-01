@@ -34,3 +34,5 @@ export const sortDown = ({aVal, bVal, aId, bId, local = false}) => {
 		return aVal > bVal ? 1 : -1;
 	}
 }
+
+export const makeWordFromId = (word) => `${word[0].toUpperCase()}${word.slice(1)}`;

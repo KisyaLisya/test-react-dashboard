@@ -6,9 +6,14 @@ import store from "./store/store";
 
 import App from "./containers/App";
 
-ReactDOM.render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
-  document.getElementById("root")
-);
+const update = () => {
+  ReactDOM.render(
+    <Provider store={store}>
+      <App />
+    </Provider>,
+    document.getElementById("root")
+  );
+}
+
+store.subscribe(update);
+update();
