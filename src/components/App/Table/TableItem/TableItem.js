@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-import { toggleTask } from '../../store/actions';
+import { toggleTask } from 'store/actions';
 
-import { makeWordFromId } from '../../active/Utils';
+import { makeWordFromId } from 'utils/Utils';
 import './TableItem.less';
 
-import ActionButton from '../ActionButton';
-import Badge from '../Badge';
+import ActionButton from 'components/ActionButton';
+import Badge from 'components/Badge';
 
 
 const TableItem = ({ className = '', data, actions, toggleTask }) => {

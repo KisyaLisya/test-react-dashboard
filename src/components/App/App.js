@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 
 import './App.less';
 
-import Table from '../../components/Table';
-import Header from '../Header';
+import Header from 'app/Header';
+import Table from 'app/Table';
+import FilterPanel from 'app/FilterPanel';
 
 export default class App extends Component {
 
@@ -20,6 +21,7 @@ export default class App extends Component {
 					name="My App"
 				/>
 				<main className="jumbotron">
+					<FilterPanel />
 					<Table />
 				</main>
 			</div>

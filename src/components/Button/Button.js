@@ -1,17 +1,16 @@
 import React from 'react';
 
-import { makeClass } from '../../active/Utils';
 import './Button.less';
 
 const Button = (props) => {
-	const propClass = makeClass(props.className);
+	const { className, name, onClick } = props;
 
 	return(
 		<button
-			className={`btn btn-secondary ${propClass}`}
-			onClick={props.onClick}
+			className={`btn ${className}`}
+			onClick={onClick}
 		>
-			{props.name}
+			{name}
 		</button>
 	);
 }

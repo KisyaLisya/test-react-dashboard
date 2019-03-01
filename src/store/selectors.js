@@ -27,10 +27,7 @@ export const getSortOptions = (store) => {
   return store.sortTasks;
 }
 
-export const sortTasks = (store) => {
-	const sortOptions = getSortOptions(store);
-	const tasks = getTasks(store);
-
+export const sortTasks = (tasks, sortOptions) => {
 	return tasks.sort((a, b) => {
 		let aVal = a[sortOptions.id];
 		let bVal = b[sortOptions.id];
@@ -55,4 +52,31 @@ export const sortTasks = (store) => {
 			return sortDown(sortProps);
 		}
 	})
+}
+
+export const getFilters = (store) => {
+  return store.filters;
+}
+
+export const getStatusFilter = (store) => {
+  const state = getFilters(store);
+  return state ? state.statusFilter : 'all';
+}
+
+export const filterByStatus = (list, filterStatus) => {
+  return list.filter((el) => {
+    const [, status] = el.status;
+
+    return filterStatus === 'all' || status === filterStatus;
+  });
+}
+
+export const getPerformedTasks = (store) => {
+  const tasks = getTasks(store);
+  const statusFilter = getStatusFilter(store);
+  const sortOptions = getSortOptions(store);
+
+  const filtered = filterByStatus(tasks, statusFilter);
+
+  return sortTasks(filtered, sortOptions);
 }

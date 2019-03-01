@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { makeClass } from '../../active/Utils';
+import { makeClass } from 'utils/Utils';
 import './NavPanel.less';
 
 export default class NavPanel extends Component {

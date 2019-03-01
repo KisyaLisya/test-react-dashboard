@@ -3,20 +3,16 @@ import { connect } from "react-redux";
 
 import './Table.less';
 
-import { sortTasks, getSortOptions } from '../../store/selectors';
-import { toggleSortType } from '../../store/actions';
+import { getPerformedTasks, getSortOptions } from 'store/selectors';
+import { toggleSortType } from 'store/actions';
 
-import TableHeadItem from '../TableHeadItem';
-import TableItem from '../TableItem';
+import TableHeadItem from './TableHeadItem';
+import TableItem from './TableItem';
 
 class Table extends Component {
 
 	render() {
 		const { data = [], sortOptions = {}, toggleSortType } = this.props;
-		// console.log(this.props);
-		// const { data = [] } = this.props;
-		// const sortOptions = {};
-		// const toggleSortType = (a, b) => console.log(a, b);
 		const items = data.map((el) => {
 			const actions = {
 				editAction: (id) => console.log(id),
@@ -54,7 +50,7 @@ class Table extends Component {
 						/>
 						<TableHeadItem
 							id="status"
-							className="Table-head-item align-middle _w75"
+							className="Table-head-item align-middle _w100"
 							value="Status"
 							sort={sortOptions}
 							onSort={toggleSortType}
@@ -84,7 +80,7 @@ class Table extends Component {
 
 const mapStateToProps = state => {
 	return {
-		data: sortTasks(state),
+		data: getPerformedTasks(state),
 		sortOptions: getSortOptions(state)
 	}
 }

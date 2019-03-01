@@ -1,4 +1,4 @@
-import { TOGGLE_TASK, EDIT_TASK, DELETE_TASK, SET_FILTER } from '../actionTypes';
+import { TOGGLE_TASK, EDIT_TASK, DELETE_TASK } from '../actionTypes';
 
 const initialState = {
   allIds: [0, 1, 2, 3, 4, 5, 6, 7],
@@ -11,13 +11,13 @@ const initialState = {
     },
     '1': {
       status: [0, 'todo'],
-      priority: [1, 'major'],
+      priority: [1, 'minor'],
 			createdAt: [20180911, '11 Sept 2018'],
       task: 'Task 1 desription',
     },
     '2': {
       status: [1, 'in progress'],
-      priority: [0, 'minor'],
+      priority: [0, 'major'],
 			createdAt: [20180912, '12 Sept 2018'],
       task: 'Task 2 desription',
     },
@@ -75,9 +75,6 @@ export default function(state = initialState, action) {
       break;
     case DELETE_TASK:
       console.log('DELETE_TASK');
-      break;
-    case SET_FILTER:
-      console.log('SET_FILTER');
       break;
     default:
       return state;

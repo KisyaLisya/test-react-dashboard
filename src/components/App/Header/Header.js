@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 
-import { makeClass } from '../../active/Utils';
+import { makeClass } from 'utils/Utils';
 import './Header.less';
 
-import NavPanel from '../NavPanel';
+import NavPanel from 'app/NavPanel';
 
 const menu = [
 	{ id: 'dashboard', name: 'Dashboard', url:'#', active: true },

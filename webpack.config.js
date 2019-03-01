@@ -20,6 +20,15 @@ module.exports = {
       }
     ]
   },
+  resolve: {
+    alias: {
+      utils: path.resolve(__dirname, 'src/active/'),
+      styles: path.resolve(__dirname, 'src/styles/'),
+      components: path.resolve(__dirname, 'src/components/'),
+      app: path.resolve(__dirname, 'src/components/App/'),
+      store: path.resolve(__dirname, 'src/store/')
+    }
+  },
   plugins: [
     new HtmlWebpackPlugin({
       template: "./src/index.html"

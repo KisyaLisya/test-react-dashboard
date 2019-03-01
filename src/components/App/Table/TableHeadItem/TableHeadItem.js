@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { makeClass, makePlaceholder } from '../../active/Utils';
+import { makeClass, makePlaceholder } from 'utils/Utils';
 import './TableHeadItem.less';
 
 const TableHeadItem = (props) => {
