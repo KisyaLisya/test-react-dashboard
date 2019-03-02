@@ -1,14 +1,13 @@
 import React from 'react';
 
-import { makeClass } from '../../active/Utils';
 import './CheckboxSelector.less';
 
 const CheckboxSelector = (props) => {
-	const propsClass = makeClass(props.className);
+	const { className = '' } = props;
 
 	return(
 		<label
-			className={`CheckboxSelector ${propsClass}`}
+			className={`CheckboxSelector ${className}`}
 		>
 			<input
 				className="CheckboxSelector-input"

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-import { toggleTask } from 'store/actions';
 
 import { makeWordFromId } from 'utils/Utils';
 import './TableItem.less';
@@ -9,7 +8,7 @@ import ActionButton from 'components/ActionButton';
 import Badge from 'components/Badge';
 
 
-const TableItem = ({ className = '', data, actions, toggleTask }) => {
+const TableItem = ({ className = '', data, actions }) => {
 	const {
 		id,
 		createdAt = 'unknown',
@@ -61,5 +60,5 @@ const TableItem = ({ className = '', data, actions, toggleTask }) => {
 
 export default connect(
 	null,
-	{ toggleTask }
+	null
 )(TableItem);

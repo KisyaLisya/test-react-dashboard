@@ -5,7 +5,8 @@ module.exports = {
   entry: "./src/index.js",
   output: {
     path: path.join(__dirname, "/dist"),
-    filename: "index-bundle.js"
+    filename: "index-bundle.js",
+    publicPath: '/',
   },
   module: {
     rules: [
@@ -28,6 +29,9 @@ module.exports = {
       app: path.resolve(__dirname, 'src/components/App/'),
       store: path.resolve(__dirname, 'src/store/')
     }
+  },
+  devServer: {
+    historyApiFallback: true,
   },
   plugins: [
     new HtmlWebpackPlugin({

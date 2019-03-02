@@ -1,9 +1,13 @@
-import { TOGGLE_TASK, EDIT_TASK, DELETE_TASK, SET_SORT, SET_SEARCH_FILTER, SET_FILTER_STATUS } from './actionTypes';
+import { SWITCH_PAGE, SET_SORT, SET_SEARCH_FILTER, SET_FILTER_STATUS } from './actionTypes';
 
-export const toggleTask = id => ({
-  type: TOGGLE_TASK,
-  payload: { id }
-});
+export const switchPage = (page) => {
+  return {
+    type: SWITCH_PAGE,
+    payload: {
+      page
+    }
+  }
+}
 
 export const toggleSortType = (id, type = true) => {
   return {

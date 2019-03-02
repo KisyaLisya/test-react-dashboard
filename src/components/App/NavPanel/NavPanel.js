@@ -1,35 +1,35 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-import { makeClass } from 'utils/Utils';
 import './NavPanel.less';
 
-export default class NavPanel extends Component {
+const NavPanel = (props) => {
+	const { className = '', list = [] } = props;
 
-	render() {
-		const props = this.props;
-		const propsClass = makeClass(props.className);
-		const list = props.list.map((el) => {
-			return(
-				<li
-					key={el.id}
-					className={`nav-item ${el.active ? 'active' : ''}`}
-				>
-					<a
-						className="nav-link"
-						href={el.url}
-					>
-						{el.name}
-					</a>
-				</li>
-			)
-		})
-
+	const navList = list.map((el) => {
 		return(
-			<ul
-				className={`navbar-nav mr-auto ${propsClass}`}
+			<li
+				key={el.id}
+				className={`nav-item ${el.active ? 'active' : ''}`}
 			>
-				{list}
-			</ul>
+				<Link
+					to={el.url}
+					className="nav-link"
+					title={el.name}
+				>
+					{el.name}
+				</Link>
+			</li>
 		)
-	}
+	});
+
+	return(
+		<ul
+			className={`navbar-nav mr-auto ${className}`}
+		>
+			{navList}
+		</ul>
+	)
 };
+
+export default NavPanel;

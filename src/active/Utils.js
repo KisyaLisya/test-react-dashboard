@@ -1,12 +1,9 @@
 
 export const isDef = (el) => el !== null && el !== undefined;
 
-export const makeClass = (className) => {
-	return className ? className : ''
-}
-
-export const makePlaceholder = (value, defaultValue = 'Type some text ...') => {
-	return value ? value : defaultValue;
+export const getFolderName = (url) => {
+	const match = url.match(/^\/(\w+)\/*.*/);
+	return Array.isArray(match) && match.length > 1 ? match[1] : ''
 }
 
 export const makeActionToId = (id, actionFunc) => {

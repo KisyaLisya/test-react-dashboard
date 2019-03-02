@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 
-import { makeClass, makePlaceholder } from '../../active/Utils';
 import './Selector.less';
 
 export default class Selector extends Component {

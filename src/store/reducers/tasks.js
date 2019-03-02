@@ -1,4 +1,4 @@
-import { TOGGLE_TASK, EDIT_TASK, DELETE_TASK } from '../actionTypes';
+import { EDIT_TASK, DELETE_TASK } from '../actionTypes';
 
 const initialState = {
   allIds: [0, 1, 2, 3, 4, 5, 6, 7],
@@ -58,18 +58,6 @@ export default function(state = initialState, action) {
   const { type, payload } = action;
 
   switch (type) {
-    case TOGGLE_TASK:
-      const { id } = payload;
-      return {
-        ...state,
-        byIds: {
-          ...state.byIds,
-          [id]: {
-            ...state.byIds[id],
-            checked: !state.byIds[id].checked
-          }
-        }
-      };
     case EDIT_TASK:
       console.log('EDIT_TASK');
       break;

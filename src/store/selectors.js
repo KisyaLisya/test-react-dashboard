@@ -1,9 +1,31 @@
 
 import { isDef, sortUp, sortDown, getUnicListItems, getSameItems } from '../active/Utils';
 
+export function getMenuState(store) {
+  return store.menu;
+}
+
 export function getTaskState(store) {
   return store.tasks;
 };
+
+export function getSortOptions(store) {
+  return store.sortTasks;
+}
+
+export function getFilters(store) {
+  return store.filters;
+}
+
+export function getMenu(store) {
+  const state = getMenuState(store);
+  return state ? state.menu : [];
+}
+
+export function getActiveMenuId(store) {
+  const state = getMenuState(store);
+  return state ? state.active : '';
+}
 
 export function getTaskList(store) {
   const state = getTaskState(store);
@@ -21,10 +43,6 @@ export function getTasks(store) {
 
 export function filterTasks(store, filterFunc) {
 	return getTasks(store).filter((el) => filterFunc(el));
-}
-
-export function getSortOptions(store) {
-  return store.sortTasks;
 }
 
 export function sortTasks(tasks, sortOptions) {
@@ -52,10 +70,6 @@ export function sortTasks(tasks, sortOptions) {
 			return sortDown(sortProps);
 		}
 	})
-}
-
-export function getFilters(store) {
-  return store.filters;
 }
 
 export function getSearchFilter(store) {

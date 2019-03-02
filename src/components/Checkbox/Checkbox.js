@@ -1,11 +1,10 @@
 import React from 'react';
 
-import { makeClass } from '../../active/Utils';
 import './Checkbox.less';
 
 const Checkbox = (props) => {
-	const propsClass = makeClass(props.className);
-	const checboxId = props.label.toLowerCase();
+	const { className = '', label = '' } = props;
+	const checboxId = label.toLowerCase();
 
 	return(
 		<div className="custom-control custom-checkbox">
@@ -17,7 +16,7 @@ const Checkbox = (props) => {
 			/>
 			<label
 				htmlFor={checboxId}
-				className={`custom-control-label Checkbox-label ${propsClass}`}
+				className={`custom-control-label Checkbox-label ${className}`}
 			>
 				{props.label}
 			</label>
