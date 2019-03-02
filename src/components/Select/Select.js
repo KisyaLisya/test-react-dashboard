@@ -27,7 +27,7 @@ const Select = (props) => {
 			id={id}
 			className={`custom-select ${className}`}
 			value={active}
-			onChange={(e) => console.log('option', e.target.value)}
+			onChange={onChange}
 		>
 			{options}
 		</select>

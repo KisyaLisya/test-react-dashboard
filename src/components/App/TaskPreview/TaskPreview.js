@@ -10,6 +10,7 @@ import {
 } from 'utils/constants';
 import { isDef } from 'utils/Utils';
 import { getTaskDataState } from 'store/selectors';
+import { saveTaskData } from 'store/actions';
 
 import Badge from 'components/Badge';
 import BaseForm from 'components/BaseForm';
@@ -24,19 +25,25 @@ class TaskPreview extends Component {
     super(props);
 
     this.state = {
-      name: '',
-      status: '0',
-      priority: '0',
-      dateRequired: {
-        days: '0d',
-        hours: '0h'
-      },
-      datePromised: {
-        days: '0d',
-        hours: '0h'
-      },
-      description: '',
+      headlineName: '',
+      headlineStatus: '',
+      taskData: {
+        name: '',
+        status: '0',
+        priority: '0',
+        dateRequired: {
+          days: '0d',
+          hours: '0h'
+        },
+        datePromised: {
+          days: '0d',
+          hours: '0h'
+        },
+        description: '',
+      }
     };
+
+    this.bindFunctions();
   }
 
   componentDidMount() {
@@ -44,17 +51,120 @@ class TaskPreview extends Component {
       data = {}
     } = this.props;
 
-    const { loaded = false, ...options} = data;
+    const { loaded = false, saved = false, ...options} = data;
 
     this.updateStateData(options);
+  }
+
+  componentDidUpdate() {
+    const {
+      data = {},
+      saveTaskData
+    } = this.props;
+    const {  } = this.props;
+    const { taskData } = this.state;
+    const { loaded = false, saved = false,  ...options} = data;
+
+    if (saved) {
+      this.updateStateData(options);
+
+      saveTaskData({
+        saved: false,
+        ...taskData
+      });
+    }
+  }
+
+  bindFunctions() {
+    this.onChangeName = this.onChangeName.bind(this);
+    this.onChangePriority = this.onChangePriority.bind(this);
+    this.onChangeStatus = this.onChangeStatus.bind(this);
+    this.onChangeRequiredDays = this.onChangeRequiredDays.bind(this);
+    this.onChangeRequiredHours = this.onChangeRequiredHours.bind(this);
+    this.onChangePromisedDays = this.onChangePromisedDays.bind(this);
+    this.onChangePromisedHours = this.onChangePromisedHours.bind(this);
+    this.onChangeDescription = this.onChangeDescription.bind(this);
+    this.onSave = this.onSave.bind(this);
   }
 
   updateStateData(data) {
 
     this.setState({
-      ...this.state,
-      ...data
+      headlineName: data.name,
+      headlineStatus: data.status,
+      taskData: {
+        ...this.state,
+        ...data
+      }
     })
+  }
+
+  onChangeFunc(e, propsName, objName) {
+    const { target: { value = '' } } = e;
+
+    if (!isDef(value)) return;
+    const { taskData } = this.state;
+
+    if (objName) {
+      this.setState({
+        taskData: {
+          ...taskData,
+          [objName]: {
+            ...taskData[objName],
+            [propsName]: value
+          }
+        }
+      });
+    } else {
+      this.setState({
+        taskData: {
+          ...taskData,
+          [propsName]: value
+        }
+      });
+    }
+  }
+
+  onChangeName(e) {
+    this.onChangeFunc(e, 'name');
+  }
+
+  onChangePriority(e) {
+    this.onChangeFunc(e, 'priority');
+  }
+
+  onChangeStatus(e) {
+    this.onChangeFunc(e, 'status');
+  }
+
+  onChangeRequiredDays(e) {
+    this.onChangeFunc(e, 'days', 'dateRequired');
+  }
+
+  onChangeRequiredHours(e) {
+    this.onChangeFunc(e, 'hours', 'dateRequired');
+  }
+
+  onChangePromisedDays(e) {
+    this.onChangeFunc(e, 'days', 'datePromised');
+  }
+
+  onChangePromisedHours(e) {
+    this.onChangeFunc(e, 'hours', 'datePromised');
+  }
+
+  onChangeDescription(e) {
+    this.onChangeFunc(e, 'description');
+  }
+
+  onSave() {
+    const { saveTaskData } = this.props;
+    const { taskData } = this.state;
+
+    saveTaskData({
+      saved: true,
+      ...taskData
+    });
   }
 
   render() {
@@ -63,30 +173,34 @@ class TaskPreview extends Component {
       isEditing = true
     } = this.props;
     const {
-      name: stateName = '',
-      status = '0',
-      priority = '1',
-      dateRequired: {
-        days: daysRequired = '0d',
-        hours: hoursRequired = '0h'
-      },
-      datePromised: {
-        days: daysPromised = '0d',
-        hours: hoursPromised = '0h'
-      },
-      description = ''
+      headlineName = '',
+      headlineStatus = '0',
+      taskData: {
+        name: stateName = '',
+        status = '0',
+        priority = '1',
+        dateRequired: {
+          days: daysRequired = '0d',
+          hours: hoursRequired = '0h'
+        },
+        datePromised: {
+          days: daysPromised = '0d',
+          hours: hoursPromised = '0h'
+        },
+        description = ''
+      }
     } = this.state;
 
     let header = null;
 
     if (isEditing) {
-      const statusObj = statusList.find((el) => el.id == status);
+      const statusObj = statusList.find((el) => el.id == headlineStatus);
       const { name: statusName } = statusObj;
 
       header = (
         <React.Fragment>
           <h5 className="modal-title mr-2">
-            {stateName}
+            {headlineName}
           </h5>
           <Badge
             type={statusName.toLowerCase()}
@@ -124,7 +238,7 @@ class TaskPreview extends Component {
               id="name"
               placeholder="Type name ..."
               value={stateName}
-              onChange={(e) => console.log(e.target.value)}
+              onChange={this.onChangeName}
             />
           </BaseForm>
           <div className="form-row mx-0">
@@ -136,6 +250,7 @@ class TaskPreview extends Component {
               <Select
                 active={priority}
                 list={priorityList}
+                onChange={this.onChangePriority}
               />
             </BaseForm>
             <BaseForm
@@ -145,6 +260,7 @@ class TaskPreview extends Component {
               <Select
                 active={status}
                 list={statusList}
+                onChange={this.onChangeStatus}
               />
             </BaseForm>
           </div>
@@ -159,11 +275,13 @@ class TaskPreview extends Component {
                   className="col mr-2"
                   active={daysRequired}
                   list={daysOption}
+                  onChange={this.onChangeRequiredDays}
                 />
                 <Select
                   className="col"
                   active={hoursRequired}
                   list={hoursOptions}
+                  onChange={this.onChangeRequiredHours}
                 />
               </div>
             </BaseForm>
@@ -177,11 +295,13 @@ class TaskPreview extends Component {
                   className="col mr-2"
                   active={daysPromised}
                   list={daysOption}
+                  onChange={this.onChangePromisedDays}
                 />
                 <Select
                   className="col"
                   active={hoursPromised}
                   list={hoursOptions}
+                  onChange={this.onChangePromisedHours}
                 />
               </div>
             </BaseForm>
@@ -194,7 +314,7 @@ class TaskPreview extends Component {
               id="editing"
               rows="8"
               value={description}
-              onChange={(e) => console.log(e.target.value)}
+              onChange={this.onChangeDescription}
             />
           </BaseForm>
 
@@ -203,6 +323,7 @@ class TaskPreview extends Component {
           <Button
             className="btn-success"
             name="Save"
+            onClick={this.onSave}
           />
         </div>
       </form>
@@ -218,5 +339,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  null
+  { saveTaskData }
 )(TaskPreview);

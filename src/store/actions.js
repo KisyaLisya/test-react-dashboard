@@ -1,4 +1,10 @@
-import { SWITCH_PAGE, SET_SORT, SET_SEARCH_FILTER, SET_FILTER_STATUS } from './actionTypes';
+import {
+  SWITCH_PAGE,
+  SET_SORT,
+  SET_SEARCH_FILTER,
+  SET_FILTER_STATUS,
+  SAVE_TASK
+} from './actionTypes';
 
 export const switchPage = (page) => {
   return {
@@ -33,6 +39,15 @@ export const changeStatusFilter = (group, filter) => {
     type: SET_FILTER_STATUS,
     payload: {
       filter
+    }
+  }
+}
+
+export const saveTaskData = (data) => {
+  return {
+    type: SAVE_TASK,
+    payload: {
+      ...data
     }
   }
 }

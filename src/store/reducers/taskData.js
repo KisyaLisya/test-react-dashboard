@@ -1,7 +1,8 @@
-import { SAVE_TASK } from '../actionTypes';
+import { SAVE_TASK, LOAD_TASK } from '../actionTypes';
 
 const initialState = {
   loaded: false,
+  saved: false,
   name: 'Task name number 222',
   status: '1',
   priority: '',
@@ -23,8 +24,9 @@ const taskData = (state = initialState, action) => {
     case SAVE_TASK:
       return {
         ...state,
+        saved: true,
         ...payload
-      }
+      };
     default:
       return state;
   }
