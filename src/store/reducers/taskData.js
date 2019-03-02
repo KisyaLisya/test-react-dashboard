@@ -3,6 +3,7 @@ import { SAVE_TASK, LOAD_TASK } from '../actionTypes';
 const initialState = {
   loaded: false,
   saved: false,
+  id: 0,
   name: 'Task name number 222',
   status: '1',
   priority: '',

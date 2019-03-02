@@ -4,19 +4,20 @@ import { connect } from "react-redux";
 import './Table.less';
 
 import { getPerformedTasks, getSortOptions } from 'store/selectors';
-import { toggleSortType } from 'store/actions';
+import { toggleSortType, deleteTask } from 'store/actions';
 
+import NotFoundBlock from 'components/NotFoundBlock';
 import TableHeadItem from './TableHeadItem';
 import TableItem from './TableItem';
 
 class Table extends Component {
 
 	render() {
-		const { data = [], sortOptions = {}, toggleSortType } = this.props;
+		const { data = [], sortOptions = {}, toggleSortType, deleteTask } = this.props;
 		const items = data.map((el) => {
 			const actions = {
 				editAction: (id) => console.log(id),
-				deleteAction: (id) => console.log(id)
+				deleteAction: (id) => deleteTask(id)
 			};
 
 			return(
@@ -27,6 +28,16 @@ class Table extends Component {
 				/>
 			)
 		});
+
+		if (items.length === 0) {
+			return(
+				<div className="Table-error">
+					<NotFoundBlock
+						value="No task found"
+					/>
+				</div>
+			)
+		}
 
 		return(
 			<table
@@ -87,5 +98,5 @@ const mapStateToProps = state => {
 
 export default connect(
 	mapStateToProps,
-	{ toggleSortType }
+	{ toggleSortType, deleteTask }
 )(Table);

@@ -3,6 +3,7 @@ import {
   SET_SORT,
   SET_SEARCH_FILTER,
   SET_FILTER_STATUS,
+  DELETE_TASK,
   SAVE_TASK
 } from './actionTypes';
 
@@ -39,6 +40,15 @@ export const changeStatusFilter = (group, filter) => {
     type: SET_FILTER_STATUS,
     payload: {
       filter
+    }
+  }
+}
+
+export const deleteTask = (id) => {
+  return {
+    type: DELETE_TASK,
+    payload: {
+      id
     }
   }
 }

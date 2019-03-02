@@ -51,7 +51,7 @@ const TableItem = ({ className = '', data, actions }) => {
 				<ActionButton
 					className="btn-outline-danger"
 					icon="fa-trash-o"
-					onClick={() => editAction(id)}
+					onClick={() => deleteAction(id)}
 				/>
 			</td>
 		</tr>

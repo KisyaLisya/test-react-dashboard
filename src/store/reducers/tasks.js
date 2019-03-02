@@ -60,10 +60,18 @@ export default function(state = initialState, action) {
   switch (type) {
     case EDIT_TASK:
       console.log('EDIT_TASK');
-      break;
+      return state;
     case DELETE_TASK:
-      console.log('DELETE_TASK');
-      break;
+      const { allIds, byIds } = state;
+      const { id: taskId } = payload;
+
+      return {
+        allIds: allIds.filter((el) => el !== taskId),
+        byIds: {
+          ...byIds,
+          [taskId]: null
+        }
+      };
     default:
       return state;
   }
