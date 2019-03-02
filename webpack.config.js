@@ -23,11 +23,12 @@ module.exports = {
   },
   resolve: {
     alias: {
-      utils: path.resolve(__dirname, 'src/active/'),
+      utils: path.resolve(__dirname, 'src/utils/'),
       styles: path.resolve(__dirname, 'src/styles/'),
       components: path.resolve(__dirname, 'src/components/'),
       app: path.resolve(__dirname, 'src/components/App/'),
-      store: path.resolve(__dirname, 'src/store/')
+      store: path.resolve(__dirname, 'src/store/'),
+      services: path.resolve(__dirname, 'src/services/')
     }
   },
   devServer: {
@@ -35,7 +36,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: "./src/index.html"
+      template: "./index.html"
     })
   ]
 };

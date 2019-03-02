@@ -1,5 +1,5 @@
 
-import { isDef, sortUp, sortDown, getUnicListItems, getSameItems } from '../active/Utils';
+import { isDef, sortUp, sortDown, getUnicListItems, getSameItems } from 'utils/Utils';
 
 export function getMenuState(store) {
   return store.menu;

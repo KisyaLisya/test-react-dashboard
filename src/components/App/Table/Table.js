@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
+import ApiService from 'services/ApiService';
 
 import './Table.less';
 
@@ -11,6 +12,19 @@ import TableHeadItem from './TableHeadItem';
 import TableItem from './TableItem';
 
 class Table extends Component {
+
+	constructor(props) {
+		super(props);
+
+		this.api = new ApiService();
+	}
+
+	componentDidMount() {
+		this.api.getAllTasks()
+		  .then((data) => {
+		    console.log(data);
+		  })
+	}
 
 	render() {
 		const { data = [], sortOptions = {}, toggleSortType, deleteTask } = this.props;
