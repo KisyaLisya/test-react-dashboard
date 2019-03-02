@@ -1,26 +1,25 @@
 import React from 'react';
 
-import './Input.less';
+import './Textarea.less';
 
-const Input = (props) => {
+const Textarea = (props) => {
 	const {
 		className = '',
+		rows = '5',
 		id = '',
-		placeholder = '',
 		value = '',
 		onChange
 	} = props;
 
 	return(
-		<input
-			id={id}
+		<textarea
 			className={`form-control ${className}`}
-			type="text"
-			placeholder={placeholder}
+			id={id}
+			rows={rows}
 			value={value}
 			onChange={onChange}
 		/>
 	);
 }
 
-export default Input;
+export default Textarea;

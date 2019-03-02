@@ -9,6 +9,10 @@ export function getTaskState(store) {
   return store.tasks;
 };
 
+export function getTaskDataState(store) {
+  return store.taskData;
+};
+
 export function getSortOptions(store) {
   return store.sortTasks;
 }

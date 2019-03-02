@@ -3,10 +3,11 @@ import React from 'react';
 import './Button.less';
 
 const Button = (props) => {
-	const { className, name, onClick } = props;
+	const { className = '', name = '', onClick } = props;
 
 	return(
 		<button
+			type="button"
 			className={`btn ${className}`}
 			onClick={onClick}
 		>
