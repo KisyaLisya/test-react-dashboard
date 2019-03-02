@@ -1,33 +1,33 @@
 
-import { sortUp, sortDown } from '../active/Utils';
+import { isDef, sortUp, sortDown, getUnicListItems, getSameItems } from '../active/Utils';
 
-export const getTaskState = (store) => {
+export function getTaskState(store) {
   return store.tasks;
 };
 
-export const getTaskList = (store) => {
+export function getTaskList(store) {
   const state = getTaskState(store);
   return state ? state.allIds : [];
 }
 
-export const getTaskById = (store, id) => {
+export function getTaskById(store, id) {
   const tasks = getTaskState(store);
   return tasks ? { ...tasks.byIds[id], id } : {};
 }
 
-export const getTasks = (store) => {
+export function getTasks(store) {
   return getTaskList(store).map((id) => getTaskById(store, id));
 }
 
-export const filterTasks = (store, filterFunc) => {
+export function filterTasks(store, filterFunc) {
 	return getTasks(store).filter((el) => filterFunc(el));
 }
 
-export const getSortOptions = (store) => {
+export function getSortOptions(store) {
   return store.sortTasks;
 }
 
-export const sortTasks = (tasks, sortOptions) => {
+export function sortTasks(tasks, sortOptions) {
 	return tasks.sort((a, b) => {
 		let aVal = a[sortOptions.id];
 		let bVal = b[sortOptions.id];
@@ -45,7 +45,6 @@ export const sortTasks = (tasks, sortOptions) => {
 			aVal: Array.isArray(aVal) ? aVal[0] : aVal,
 			bVal: Array.isArray(bVal) ? bVal[0] : bVal
 		};
-    console.log(sortProps);
 
 		if (sortOptions.type) {
 			return sortUp(sortProps);
@@ -55,16 +54,39 @@ export const sortTasks = (tasks, sortOptions) => {
 	})
 }
 
-export const getFilters = (store) => {
+export function getFilters(store) {
   return store.filters;
 }
 
-export const getStatusFilter = (store) => {
+export function getSearchFilter(store) {
+  const state = getFilters(store);
+  return state ? state.searchFilter : '';
+}
+
+export function getStatusFilter(store) {
   const state = getFilters(store);
   return state ? state.statusFilter : 'all';
 }
 
-export const filterByStatus = (list, filterStatus) => {
+export function applySearchInput(filter, value, caseSensitive = false) {
+  const filterValue = caseSensitive ? filter : filter.toLowerCase();
+  const compareValue = caseSensitive ? value : value.toLowerCase();
+
+	if (filterValue) {
+		const regex = new RegExp(`^${filterValue}`);
+		return compareValue.search(regex) !== -1;
+	} else {
+		return true;
+	}
+}
+
+export function filterListBySearch(list, store) {
+  const filter = getSearchFilter(store);
+  return list.filter((el) => applySearchInput(filter, el.task));
+}
+
+export function filterByStatus(list, store) {
+  const filterStatus = getStatusFilter(store);
   return list.filter((el) => {
     const [, status] = el.status;
 
@@ -72,12 +94,27 @@ export const filterByStatus = (list, filterStatus) => {
   });
 }
 
-export const getPerformedTasks = (store) => {
+export function connectFilteredLists(...filters) {
+  const firstFilter = filters[0];
+  const initFilter = isDef(firstFilter) ? firstFilter : [];
+
+  return filters.reduce((acc, list) => {
+    return getSameItems(
+      getUnicListItems(acc, 'id'),
+      getUnicListItems(list, 'id'),
+      'id'
+    );
+  }, initFilter);
+}
+
+export function getPerformedTasks(store) {
   const tasks = getTasks(store);
-  const statusFilter = getStatusFilter(store);
   const sortOptions = getSortOptions(store);
 
-  const filtered = filterByStatus(tasks, statusFilter);
+  const filtered = connectFilteredLists(
+    filterListBySearch(tasks, store),
+    filterByStatus(tasks, store)
+  );
 
   return sortTasks(filtered, sortOptions);
 }

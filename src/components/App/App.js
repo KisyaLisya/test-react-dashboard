@@ -20,8 +20,10 @@ export default class App extends Component {
 				<Header
 					name="My App"
 				/>
-				<main className="jumbotron">
-					<FilterPanel />
+				<main className="App-main">
+					<FilterPanel
+						className="mt-0"
+					/>
 					<Table />
 				</main>
 			</div>

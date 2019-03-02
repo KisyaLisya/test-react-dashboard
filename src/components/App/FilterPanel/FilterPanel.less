@@ -1,2 +1,18 @@
 
 @import "~styles/variables.less";
+@import "~styles/mixins.less";
+@import "~styles/modifiers.less";
+
+.FilterPanel {
+  display: flex;
+
+  margin: 1rem 0.5rem;
+
+  &-item {
+    flex-shrink: 0;
+
+    &:not(:last-child) {
+      margin-right: 0.5rem;
+    }
+  }
+}

@@ -6,12 +6,12 @@ import './RadioButtonGroup.less';
 import RadioButton from 'components/RadioButton';
 
 const RadioButtonGroup = (props) => {
-	const { className, name, list, selected, onChange } = props;
+	const { className, buttonClass, name, list, selected, onChange } = props;
 
 	const buttons = list.map((el) => {
 		return(
 			<RadioButton
-				className={className}
+				className={buttonClass}
 				id={el}
 				key={el}
 				group={name}
@@ -23,7 +23,7 @@ const RadioButtonGroup = (props) => {
 	})
 
 	return(
-		<div className="btn-group btn-group-toggle">
+		<div className={`btn-group btn-group-toggle ${className}`}>
 			{buttons}
 		</div>
 	);

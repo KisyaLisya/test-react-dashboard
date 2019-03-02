@@ -5,11 +5,9 @@ import './RadioButton.less';
 const RadioButton = (props) => {
 	const { className, id, group, name, checked, onChange } = props;
 
-	console.log(name, checked);
-
 	return(
 		<label
-			className={`btn ${className} ${checked ? 'active' : ''}`}
+			className={`RadioButton btn ${className} ${checked ? 'active' : ''}`}
 		>
 			<input
 				type="radio"

@@ -1,8 +1,8 @@
-import { SET_FILTER_NAME, SET_FILTER_STATUS } from '../actionTypes';
+import { SET_SEARCH_FILTER, SET_FILTER_STATUS } from '../actionTypes';
 import { STATUS_FILTERS } from 'utils/constants';
 
 const initialState = {
-  nameFilter: '',
+  searchFilter: '',
   statusFilter: STATUS_FILTERS.byIds.ALL
 }
 
@@ -10,10 +10,10 @@ const Filter = (state = initialState, action) => {
   const { type = '', payload = {} } = action;
 
   switch (type) {
-    case SET_FILTER_NAME:
+    case SET_SEARCH_FILTER:
       return {
         ...state,
-        nameFilter: payload.filter
+        searchFilter: payload.filter
       };
     case SET_FILTER_STATUS:
       return {

@@ -4,18 +4,25 @@ import { connect } from "react-redux";
 import './FilterPanel.less';
 import { STATUS_FILTERS } from 'utils/constants';
 
-import { getStatusFilter } from 'store/selectors';
-import { changeStatusFilter } from 'store/actions';
+import { getSearchFilter, getStatusFilter } from 'store/selectors';
+import { changeSearchFilter, changeStatusFilter } from 'store/actions';
 
+import SearchInput from 'components/SearchInput';
 import RadioButtonGroup from 'components/RadioButtonGroup';
 
 const FilterPanel = (props) => {
-	const { statusId, changeStatusFilter }= props;
+	const { className, searchFilter, statusId, changeSearchFilter, changeStatusFilter }= props;
 
 	return(
-		<div className="jumbotron">
+		<div className={`FilterPanel ${className}`}>
+			<SearchInput
+				className="FilterPanel-item _w250"
+				value={searchFilter}
+				onSearch={changeSearchFilter}
+			/>
 			<RadioButtonGroup
-				className="btn-info"
+				className="FilterPanel-item"
+				buttonClass="btn-outline-primary"
 				name="filter_panel"
 				list={STATUS_FILTERS.allIds.slice()}
 				selected={statusId}
@@ -27,11 +34,12 @@ const FilterPanel = (props) => {
 
 const mapStateToProps = state => {
 	return {
+		searchFilter: getSearchFilter(state),
 		statusId: getStatusFilter(state)
 	}
 }
 
 export default connect(
 	mapStateToProps,
-	{ changeStatusFilter }
+	{ changeSearchFilter, changeStatusFilter }
 )(FilterPanel);
