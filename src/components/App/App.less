@@ -3,10 +3,36 @@
 @import "~styles/mixins.less";
 
 .App {
+  display: flex;
+  flex-direction: column;
+
+  height: 100vh;
+
+  &-header {
+    flex-shrink: 0;
+    min-height: 40px;
+  }
 
   &-main {
+    flex-grow: 1;
     padding: 1rem 0;
-    
+
+    overflow-y: auto;
+
     background-color: @mainBg;
+  }
+}
+
+* {
+
+  &::-webkit-scrollbar {
+  	width: 10px;
+  	height: 10px;
+  	background-color: lighten(@mint, 30%);
+  }
+
+  &::-webkit-scrollbar-thumb {
+  	background: lighten(@mint, 15%);
+    border-radius: 0.25rem;
   }
 }

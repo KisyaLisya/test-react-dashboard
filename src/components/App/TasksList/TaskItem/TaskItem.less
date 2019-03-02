@@ -1,0 +1,63 @@
+
+@import "~styles/variables";
+@import "~styles/mixins.less";
+
+.TaskItem {
+  .clickable;
+
+  display: flex;
+  flex-shrink: 0;
+
+  height: 48px;
+
+  // rewrite bootstrap styles
+  &.list-group-item {
+    border-radius: 0;
+    border: 1px solid lighten(@mint, 15%);
+    border-left: none;
+    border-right: none;
+
+    &:hover {
+      background-color: lighten(@mint, 30%);
+    }
+
+    &:first-child {
+      border-top: none;
+    }
+  }
+
+  &.active {
+
+    background-color: lighten(@mint, 10%);
+
+    &:hover,
+    &:focus,
+    &:active {
+      background-color: lighten(@mint, 10%);
+    }
+  }
+
+  &-status {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+
+    margin-right: 0.75rem;
+    width: 80px;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &-name {
+    display: inline-block;
+    flex-grow: 1;
+
+    overflow: hidden;
+
+    vertical-align: middle;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+}

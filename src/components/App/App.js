@@ -11,6 +11,7 @@ import './App.less';
 
 import Header from 'app/Header';
 import Dashboard from 'app/Dashboard';
+import Tasks from 'app/Tasks';
 
 const menu = [
 	{ id: 'dashboard', name: 'Dashboard', url:'/dashboard', active: true },
@@ -29,10 +30,11 @@ class App extends Component {
 
 		return(
 			<Router>
-				<div>
+				<div className="App">
 					<Route path="/" render={(props) => {
 							return(
 								<Header
+									className="App-header"
 									name="UI Task Tracker"
 									menu={menu}
 									route={props}
@@ -41,10 +43,6 @@ class App extends Component {
 						}}
 					/>
 					<Switch>
-						<Route
-							exact path="/"
-							render={() => <h1>Home</h1>}
-						/>
 						<Route
 							exact path="/dashboard"
 							render={() => {
@@ -67,20 +65,26 @@ class App extends Component {
 						/>
 						<Route
 							exact path="/tasks/:id?"
-							render={() => <h1>Tasks</h1>}
+							render={() => {
+								return(
+									<Tasks
+										className="App-main"
+									/>
+								)
+							}}
 						/>
 						<Route
 							path="/tasks/:id?"
 							render={() => {
 								return(
 									<Redirect
-										to="/tasks"
+										to="/tasks/"
 									/>
 								)
 							}}
 						/>
 						<Redirect
-							to="/"
+							to="/dashboard"
 						/>
 					</Switch>
 

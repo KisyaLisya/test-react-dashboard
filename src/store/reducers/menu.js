@@ -4,7 +4,7 @@ const initialState = {
   active: '',
   menu: [
   	{ id: 'dashboard', name: 'Dashboard', url:'/dashboard', active: false },
-  	{ id: 'tasks', name: 'Tasks', url:'/tasks', active: false },
+  	{ id: 'tasks', name: 'Tasks', url:'/tasks/', active: false },
   ]
 }
 
