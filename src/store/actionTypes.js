@@ -1,4 +1,8 @@
 
+export const LOGGED_IN = "LOGGED_IN";
+export const LOGGED_OUT = "LOGGED_OUT";
+export const LOGGING_IN = "LOGGING_IN";
+
 export const SWITCH_PAGE = "SWITCH_PAGE";
 
 export const TASKS_LOADING = "TASKS_LOADING";

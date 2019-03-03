@@ -6,6 +6,7 @@ const Input = (props) => {
 	const {
 		className = '',
 		id = '',
+		type = 'text',
 		placeholder = '',
 		value = '',
 		onChange
@@ -15,7 +16,7 @@ const Input = (props) => {
 		<input
 			id={id}
 			className={`form-control ${className}`}
-			type="text"
+			type={type}
 			placeholder={placeholder}
 			value={value}
 			onChange={onChange}

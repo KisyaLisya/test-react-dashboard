@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Link } from 'react-router-dom';
 
 import { getFolderName } from 'utils/Utils';
-import { switchPage } from 'store/actions';
+import { switchPage, logout as onLogout } from 'store/actions';
 import { getMenu, getActiveMenuId } from 'store/selectors';
 
 import './Header.less';
@@ -43,6 +43,7 @@ class Header extends Component {
 			className = '',
 			name = '',
 			menu = [],
+			onLogout
 		} = this.props;
 
 		return(
@@ -65,6 +66,7 @@ class Header extends Component {
 					to="/login"
 					className="btn btn-secondary"
 					title="Logout"
+					onClick={() => onLogout()}
 				>
 					<i className="fa fa-power-off"></i>
 				</Link>
@@ -82,5 +84,5 @@ const mapStateToProps = state => {
 
 export default connect(
 	mapStateToProps,
-	{ switchPage }
+	{ switchPage, onLogout }
 )(Header);

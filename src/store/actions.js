@@ -1,4 +1,7 @@
 import {
+  LOGGED_IN,
+  LOGGED_OUT,
+  LOGGING_IN,
   SWITCH_PAGE,
   TASKS_LOADING,
   TASKS_LOADED,
@@ -10,10 +13,61 @@ import {
   DELETE_TASK,
   SAVE_TASK
 } from './actionTypes';
+import { isDef } from 'utils/Utils';
 import { formTasksList, formTaskData } from 'utils/DataFormers';
 import ApiService from 'services/ApiService';
 
 const Api = new ApiService();
+
+export const loginByToken = () => {
+  return (dispatch) => {
+    dispatch(loggingIn());
+    return Api.loginByToken()
+      .then(
+        (data) => dispatch(loggedIn(data, true)),
+        (err) => console.log(err)
+      )
+  }
+}
+
+export const login = (userData) => {
+  return (dispatch) => {
+    dispatch(loggingIn());
+    return Api.login(userData)
+      .then(
+        (data) => dispatch(loggedIn(data)),
+        (err) => console.log(err)
+      )
+  }
+}
+
+export const loggingIn = () => {
+  return {
+    type: LOGGING_IN,
+    payload: null
+  }
+}
+
+export const loggedIn = (data, err) => {
+  if (isDef(data)) {
+    Api.setToken(data)
+  }
+  return {
+    type: LOGGED_IN,
+    payload: {
+      logged: isDef(data),
+      error: !isDef(err) && !isDef(data) ? `Invalid login or password` : ''
+    }
+  }
+}
+
+export const logout = () => {
+  Api.logout();
+  return {
+    type: LOGGED_OUT,
+    payload: null
+  }
+}
 
 export const loadTasks = () => {
   return (dispatch) => {

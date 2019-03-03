@@ -1,6 +1,25 @@
 
 import { isDef, sortUp, sortDown, getUnicListItems, getSameItems } from 'utils/Utils';
 
+export function getUserState(store) {
+  return store.user;
+}
+
+export function getUserLoginStatus(store) {
+  const state = getUserState(store);
+  return state ? state.isLoggedIn : false;
+}
+
+export function getUserLoginLoading(store) {
+  const state = getUserState(store);
+  return state ? state.loading : false;
+}
+
+export function getUserLoginError(store) {
+  const state = getUserState(store);
+  return state ? state.error : false;
+}
+
 export function getMenuState(store) {
   return store.menu;
 }

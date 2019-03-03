@@ -1,5 +1,7 @@
 /*
 
+  User 'npm run build_data' to config database
+
   CONFIGURATION DESCRIPTION
 
   data is an list of objects with TaskData interface
@@ -25,7 +27,22 @@
 
 */
 
-module.exports = [
+const users = [
+  {
+    id: 0,
+    username: 'User1',
+    password: '1111',
+    sessionToken: 'sessionTokenWillBeHere1',
+  },
+  {
+    id: 1,
+    username: 'User2',
+    password: '1111',
+    sessionToken: 'sessionTokenWillBeHere2',
+  },
+];
+
+const tasks = [
   {
     id: 0,
     name: "Have a nice Day",
@@ -138,4 +155,9 @@ module.exports = [
     },
     description: "Solve problem with server"
   }
-]
+];
+
+module.exports = {
+  users: users,
+  tasks: tasks
+}

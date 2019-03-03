@@ -191,8 +191,6 @@ class TaskPreview extends Component {
 
     let header = null;
 
-    console.log(isEditing)
-
     if (isEditing) {
       const statusObj = statusList.find((el) => el.id == headlineStatus);
       const { name: statusName } = statusObj;

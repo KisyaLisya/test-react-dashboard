@@ -3,4 +3,7 @@ const data = require('./config.js');
 
 const deployer = new Handler('/../../data');
 
-deployer.init(data);
+deployer.init(
+  data.tasks,
+  data.users
+);

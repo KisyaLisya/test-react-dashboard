@@ -46,9 +46,7 @@ class Tasks extends Component {
 			taskData = {},
 			saveTaskData
 		} = this.props;
-
 		const { data: { id: taskId = null } } = taskData;
-		console.log(taskId);
 
 		return(
 			<main

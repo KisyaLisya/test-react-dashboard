@@ -9,8 +9,18 @@ module.exports = class Handler {
     this.logger = new Logger('DataBase');
   }
 
-  init(data) {
-    this.makeTasks(data);
+  init(taskData, usersData) {
+    this.makeUsers(usersData);
+    this.makeTasks(taskData);
+  }
+
+  makeUsers(data) {
+    const fileData = {
+      users: {
+        ...data
+      }
+    }
+    this.writeFile('/users.json', fileData);
   }
 
   makeTasks(data) {
