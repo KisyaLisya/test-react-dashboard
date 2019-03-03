@@ -1,1 +1,1 @@
-worker: npm run start_api
+worker: npm run prod_server

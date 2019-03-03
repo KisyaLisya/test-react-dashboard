@@ -99,21 +99,11 @@ class App extends Component {
 						}}
 					/>
 					<Route
-						exact path="/tasks/:id?"
+						path="/tasks/:id?"
 						render={() => {
 							return(
 								<Tasks
 									className="App-main"
-								/>
-							)
-						}}
-					/>
-					<Route
-						path="/tasks/:id?"
-						render={() => {
-							return(
-								<Redirect
-									to="/tasks/"
 								/>
 							)
 						}}
