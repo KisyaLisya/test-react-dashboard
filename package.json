@@ -6,12 +6,12 @@
   "scripts": {
     "del_data": "rm -rf /data && mkdir -p data/tasks",
     "build_data": "npm run del_data && node ./configs/configDeploy.js",
-    "start_api": "json-server --watch ./data/db.json",
+    "start_api": "node jsonServer.js",
     "start_front": "webpack-dev-server --mode development --open --hot",
-    "start": "npm run start_front | npm run start_api",
+    "start_dev": "npm run start_front | npm run start_api",
     "build": "webpack --mode production",
     "server": "node express.js",
-    "prod_server": "npm run start_api | npm run server",
+    "start": "npm run build && npm run server",
     "postinstall": "npm run build"
   },
   "keywords": [],

@@ -3,7 +3,11 @@ import { makeCurrentDate } from 'utils/dataFormers';
 
 export const UPDATE_TIME = 5; // update time in minutes
 
-const API_URL = 'http://localhost:3000';
+// dev server
+// const API_URL = `http://localhost:3000/api`;
+
+// prod server
+const API_URL = `${window.location.origin}/api`;
 
 export default class ApiService {
 

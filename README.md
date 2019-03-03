@@ -13,19 +13,15 @@ To build your config data use *npm run build_data*
   to start prod build server
 
 > *npm start*
- to start dev server
+ to deploy and start prod server
 
 #### App default user:
 > *login: User1*
 
 > *password: 1111*
 
-Production server uses port *5000*
+For dev server you need to change API_URL constant in *./src/services/ApiService.js*
 
-Dev server uses port *8080*
+Then use this command to start dev server(webpack + jsonServer)
 
-Api server uses port *3000*
-
-Production server is *http://localhost:5000*
-
-Dev server is *http://localhost:8080*
+> *npm run start_dev*
