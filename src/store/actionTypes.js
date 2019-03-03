@@ -1,6 +1,9 @@
 
 export const SWITCH_PAGE = "SWITCH_PAGE";
 
+export const TASKS_LOADED = "TASKS_LOADED";
+export const TASKS_LOADING = "";
+
 export const PREVIEW_TASK = "PREVIEW_TASK";
 export const SAVE_TASK = "SAVE_TASK";
 export const EDIT_TASK = "EDIT_TASK";

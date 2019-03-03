@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-import ApiService from 'services/ApiService';
 
 import './Table.less';
 
-import { getPerformedTasks, getSortOptions } from 'store/selectors';
-import { toggleSortType, deleteTask } from 'store/actions';
+import { getMinutesDelay } from 'utils/Utils';
+import { getTasksLoading, getPerformedTasks, getSortOptions } from 'store/selectors';
+import { loadTasks, toggleSortType, deleteTask } from 'store/actions';
 
 import NotFoundBlock from 'components/NotFoundBlock';
+import Spinner from 'components/Spinner';
 import TableHeadItem from './TableHeadItem';
 import TableItem from './TableItem';
 
@@ -15,19 +16,24 @@ class Table extends Component {
 
 	constructor(props) {
 		super(props);
-
-		this.api = new ApiService();
 	}
 
 	componentDidMount() {
-		this.api.getAllTasks()
-		  .then((data) => {
-		    console.log(data);
-		  })
+		const { loadTasks } = this.props;
+
+		loadTasks();
+		this.refreshTimeout = setInterval(() => {
+			console.log('reloading...');
+			loadTasks();
+		}, getMinutesDelay(1));
+	}
+
+	componentWillUnmount() {
+		clearInterval(this.refreshTimeout);
 	}
 
 	render() {
-		const { data = [], sortOptions = {}, toggleSortType, deleteTask } = this.props;
+		const { loading = true, data = [], sortOptions = {}, toggleSortType, deleteTask } = this.props;
 		const items = data.map((el) => {
 			const actions = {
 				editAction: (id) => console.log(id),
@@ -42,6 +48,14 @@ class Table extends Component {
 				/>
 			)
 		});
+
+		if (loading) {
+			return(
+				<div className="Table-error">
+					<Spinner />
+				</div>
+			);
+		}
 
 		if (items.length === 0) {
 			return(
@@ -105,6 +119,8 @@ class Table extends Component {
 
 const mapStateToProps = state => {
 	return {
+		loading: getTasksLoading(state),
+		// loading: true,
 		data: getPerformedTasks(state),
 		sortOptions: getSortOptions(state)
 	}
@@ -112,5 +128,5 @@ const mapStateToProps = state => {
 
 export default connect(
 	mapStateToProps,
-	{ toggleSortType, deleteTask }
+	{ loadTasks, toggleSortType, deleteTask }
 )(Table);

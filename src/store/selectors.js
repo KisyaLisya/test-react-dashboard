@@ -21,6 +21,11 @@ export function getFilters(store) {
   return store.filters;
 }
 
+export function getTasksLoading(store) {
+  const state = getTaskState(store);
+  return state ? state.loading : false;
+}
+
 export function getMenu(store) {
   const state = getMenuState(store);
   return state ? state.menu : [];

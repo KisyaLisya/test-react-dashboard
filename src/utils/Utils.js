@@ -6,6 +6,10 @@ export const getFolderName = (url) => {
 	return Array.isArray(match) && match.length > 1 ? match[1] : ''
 }
 
+export const getMinutesDelay = (mins) => {
+	return 1000 * 60 * mins;
+}
+
 export const makeActionToId = (id, actionFunc) => {
 	return () => actionFunc(id);
 }
