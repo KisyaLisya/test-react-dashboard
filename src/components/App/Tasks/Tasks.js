@@ -5,11 +5,18 @@ import './Tasks.less';
 
 import { getMinutesDelay, isDef } from 'utils/Utils';
 import { getTasksLoading, getPerformedTasks, getTaskDataState } from 'store/selectors';
-import { loadTasks, loadTaskData, saveTaskData } from 'store/actions';
+import {
+	loadTasks,
+	loadTaskData,
+	saveTaskData,
+	createNewTask,
+	closeTask
+} from 'store/actions';
 
 import FilterPanel from 'app/FilterPanel';
 import TasksList from 'app/TasksList';
 import TaskPreview from 'app/TaskPreview';
+import AddTaskWindow from 'app/AddTaskWindow';
 
 class Tasks extends Component {
 
@@ -44,9 +51,21 @@ class Tasks extends Component {
 			loadingList = false,
 			tasksList = [],
 			taskData = {},
-			saveTaskData
+			saveTaskData,
+			createNewTask,
+			closeTask
 		} = this.props;
 		const { data: { id: taskId = null } } = taskData;
+
+		const previewPanel = getSidePanel(
+			taskId,
+			{
+				taskData,
+				saveTaskData,
+				createNewTask,
+				closeTask
+			}
+		);
 
 		return(
 			<main
@@ -63,16 +82,40 @@ class Tasks extends Component {
 						list={tasksList}
 						onSelect={this.selectTask}
 					/>
-					<TaskPreview
-						className="Tasks-preview"
-						isEditing={isDef(taskId)}
-						data={taskData}
-						onUpdate={saveTaskData}
-					/>
+					{previewPanel}
 				</div>
 			</main>
 		);
 	}
+}
+
+function getSidePanel(taskId, props) {
+	const {
+		taskData,
+		saveTaskData,
+		createNewTask,
+		closeTask
+	} = props;
+	let body = null;
+	if (isDef(taskId)) {
+		body = (
+			<TaskPreview
+				className="Tasks-preview"
+				isEditing={taskId !== 'new'}
+				data={taskData}
+				onUpdate={saveTaskData}
+				onClose={closeTask}
+			/>
+		);
+	} else {
+		body = (
+			<AddTaskWindow
+				className="Tasks-preview"
+				onClick={createNewTask}
+			/>
+		)
+	}
+	return body;
 }
 
 const mapStateToProps = state => {
@@ -85,5 +128,5 @@ const mapStateToProps = state => {
 
 export default connect(
 	mapStateToProps,
-	{ loadTasks, loadTaskData, saveTaskData }
+	{ loadTasks, loadTaskData, saveTaskData, createNewTask, closeTask }
 )(Tasks);

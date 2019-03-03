@@ -1,8 +1,26 @@
 import {
   TASK_DATA_LOADING,
   TASK_DATA_LOADED,
-  SAVE_TASK
+  SAVE_TASK,
+  ADD_TASK,
+  CLOSE_TASK
 } from '../actionTypes';
+
+const defaultState = {
+  id: 'new',
+  name: '',
+  status: '0',
+  priority: '0',
+  requiredDate: {
+    days: '0d',
+    hours: '0h'
+  },
+  promisedDate: {
+    days: '0d',
+    hours: '0h'
+  },
+  description: '',
+};
 
 const initialState = {
   loading: false,
@@ -21,7 +39,6 @@ const taskData = (state = initialState, action) => {
         loading: true,
       };
     case TASK_DATA_LOADED:
-      console.log('LOADED', state, payload);
       return {
         ...state,
         loading: false,
@@ -33,6 +50,20 @@ const taskData = (state = initialState, action) => {
         ...state,
         loaded: false,
       };
+    case ADD_TASK:
+      return {
+        ...state,
+        loaded: true,
+        data: {
+          ...defaultState
+        }
+      };
+    case CLOSE_TASK:
+      return {
+        ...state,
+        loaded: false,
+        data: {}
+      }
     default:
       return state;
   }

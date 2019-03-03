@@ -10,7 +10,9 @@ import {
   SET_SORT,
   SET_SEARCH_FILTER,
   SET_FILTER_STATUS,
+  ADD_TASK,
   DELETE_TASK,
+  CLOSE_TASK,
   SAVE_TASK
 } from './actionTypes';
 import { isDef } from 'utils/Utils';
@@ -173,6 +175,21 @@ export const saveTaskData = (data) => {
     payload: {
       ...data
     }
+  }
+}
+
+export const createNewTask = () => {
+  return {
+    type: ADD_TASK,
+    payload: null
+  }
+}
+
+export const closeTask = () => {
+  console.log('closeTask');
+  return {
+    type: CLOSE_TASK,
+    payload: null
   }
 }
 

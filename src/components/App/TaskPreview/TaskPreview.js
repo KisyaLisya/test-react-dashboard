@@ -11,6 +11,7 @@ import {
 import { isDef } from 'utils/Utils';
 import { saveTaskData } from 'store/actions';
 
+import ActionButton from 'components/ActionButton';
 import Badge from 'components/Badge';
 import BaseForm from 'components/BaseForm';
 import Button from 'components/Button';
@@ -85,7 +86,7 @@ class TaskPreview extends Component {
   }
 
   updateStateData(data) {
-    if (!data.id) return;
+    if (!isDef(data.id)) return;
 
     this.setState({
       headlineName: data.name,
@@ -168,7 +169,8 @@ class TaskPreview extends Component {
   render() {
     const {
       className = '',
-      isEditing = false
+      isEditing = false,
+      onClose
     } = this.props;
     const {
       headlineName = '',
@@ -204,6 +206,12 @@ class TaskPreview extends Component {
             type={statusName.toLowerCase()}
             value={statusName}
           />
+          <ActionButton
+            className="btn-outline-danger ml-auto"
+            icon="fa-times"
+            title="Close"
+            onClick={() => onClose()}
+          />
         </React.Fragment>
       );
     } else {
@@ -215,6 +223,12 @@ class TaskPreview extends Component {
           <Badge
             type="todo"
             value="Todo"
+          />
+          <ActionButton
+            className="btn-outline-danger ml-auto"
+  					icon="fa-times"
+            title="Close"
+            onClick={() => onClose()}
           />
         </React.Fragment>
       );
