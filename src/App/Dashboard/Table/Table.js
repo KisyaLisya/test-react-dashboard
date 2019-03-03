@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import './Table.less';
 
 import { UPDATE_TIME } from 'services/ApiService';
-import { getMinutesDelay } from 'utils/Utils';
+import { getMinutesDelay } from 'utils/utils';
 import { getTasksLoading, getPerformedTasks, getSortOptions } from 'store/selectors';
 import { loadTasks, toggleSortType, deleteTask } from 'store/actions';
 

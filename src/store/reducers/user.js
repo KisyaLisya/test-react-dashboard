@@ -1,5 +1,5 @@
 import { LOGGED_IN, LOGGED_OUT, LOGGING_IN } from '../actionTypes';
-import { isDef } from 'utils/Utils';
+import { isDef } from 'utils/utils';
 
 const initialState = {
   isLoggedIn: false,

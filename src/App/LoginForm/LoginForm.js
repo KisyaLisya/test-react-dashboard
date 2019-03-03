@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 
 import './LoginForm.less';
-import { isDef } from 'utils/Utils';
+import { isDef } from 'utils/utils';
 
 import BaseForm from 'components/BaseForm';
 import Button from 'components/Button';

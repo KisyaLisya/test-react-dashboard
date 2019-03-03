@@ -1,5 +1,5 @@
 import 'babel-polyfill';
-import { makeCurrentDate } from 'utils/DataFormers';
+import { makeCurrentDate } from 'utils/dataFormers';
 
 export const UPDATE_TIME = 5; // update time in minutes
 
@@ -139,16 +139,6 @@ export default class ApiService {
   }
 
 }
-
-// function makeTaskList(data) {
-//   return Object.keys(data).map((id) => data[id]);
-// }
-//
-// function makeListFromData(data) {
-//   return Object.keys(data)
-//     .map((id) => data[id])
-//     .sort((a, b) => a.id >= b.id ? 1 : -1)
-// }
 
 function checkUser(users, userData, token) {
   const { login = '', password = '' } = userData;

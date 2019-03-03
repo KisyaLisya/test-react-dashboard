@@ -1,5 +1,5 @@
 
-import { isDef } from 'utils/Utils';
+import { isDef } from 'utils/utils';
 
 export const makeDates = (number) => {
   const dates = [];

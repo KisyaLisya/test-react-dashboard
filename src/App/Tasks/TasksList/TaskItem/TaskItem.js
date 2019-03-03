@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { makeWordFromId } from 'utils/Utils';
+import { makeWordFromId } from 'utils/utils';
 import './TaskItem.less';
 
 import Badge from 'components/Badge';

@@ -1,5 +1,5 @@
 
-import { isDef, sortUp, sortDown, getUnicListItems, getSameItems } from 'utils/Utils';
+import { isDef, sortUp, sortDown, getUnicListItems, getSameItems } from 'utils/utils';
 
 export function getUserState(store) {
   return store.user;

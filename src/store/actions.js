@@ -15,8 +15,8 @@ import {
   CLOSE_TASK,
   UPDATE_TASK_STATUS
 } from './actionTypes';
-import { isDef } from 'utils/Utils';
-import { formTasksList, formTaskData } from 'utils/DataFormers';
+import { isDef } from 'utils/utils';
+import { formTasksList, formTaskData } from 'utils/dataFormers';
 import ApiService from 'services/ApiService';
 
 const Api = new ApiService();
@@ -183,12 +183,6 @@ export const deleteTask = (id) => {
         (err) => console.log(err)
       );
   }
-  // return {
-  //   type: DELETE_TASK,
-  //   payload: {
-  //     id
-  //   }
-  // }
 }
 
 export const onParsedData = (data) => {

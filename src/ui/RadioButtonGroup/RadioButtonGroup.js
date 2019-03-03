@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { makeWordFromId } from 'utils/Utils';
+import { makeWordFromId } from 'utils/utils';
 import './RadioButtonGroup.less';
 
 import RadioButton from 'components/RadioButton';

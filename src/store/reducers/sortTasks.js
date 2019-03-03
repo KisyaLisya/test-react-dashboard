@@ -1,12 +1,8 @@
 import { SET_SORT, SWITCH_PAGE } from '../actionTypes';
 
-const defaultState = {
+const initialState = {
   id: 'createdAt',
   type: true
-}
-
-const initialState = {
-  ...defaultState
 };
 
 const sortTasks = (state = initialState, action) => {
@@ -21,7 +17,7 @@ const sortTasks = (state = initialState, action) => {
       };
     case SWITCH_PAGE:
       return {
-        ...defaultState
+        ...initialState
       };
     default:
       return state;

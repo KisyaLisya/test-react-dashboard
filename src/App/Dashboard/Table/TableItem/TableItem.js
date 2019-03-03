@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 
-import { makeWordFromId } from 'utils/Utils';
+import { makeWordFromId } from 'utils/utils';
 import './TableItem.less';
 
 import ActionButton from 'components/ActionButton';

@@ -8,7 +8,7 @@ import {
   DAYS_OPTIONS as daysOption,
   HOURS_OPTIONS as hoursOptions
 } from 'utils/constants';
-import { isDef } from 'utils/Utils';
+import { isDef } from 'utils/utils';
 
 import ActionButton from 'components/ActionButton';
 import Badge from 'components/Badge';

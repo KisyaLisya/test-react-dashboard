@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { Link } from 'react-router-dom';
 
-import { getFolderName } from 'utils/Utils';
+import { getFolderName } from 'utils/utils';
 import { switchPage, logout as onLogout } from 'store/actions';
 import { getMenu, getActiveMenuId } from 'store/selectors';
 
 import './Header.less';
 
-import NavPanel from 'app/NavPanel';
+import NavPanel from './NavPanel';
 
 class Header extends Component {
 

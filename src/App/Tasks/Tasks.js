@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import './Tasks.less';
 
 import { UPDATE_TIME } from 'services/ApiService';
-import { getMinutesDelay, isDef } from 'utils/Utils';
+import { getMinutesDelay, isDef } from 'utils/utils';
 import { getTasksLoading, getTaskDataLoading, getPerformedTasks, getTaskDataState } from 'store/selectors';
 import {
 	loadTasks,
@@ -15,10 +15,10 @@ import {
 	closeTask
 } from 'store/actions';
 
-import FilterPanel from 'app/FilterPanel';
-import TasksList from 'app/TasksList';
-import TaskPreview from 'app/TaskPreview';
-import AddTaskWindow from 'app/AddTaskWindow';
+import FilterPanel from 'components/FilterPanel';
+import TasksList from './TasksList';
+import TaskPreview from './TaskPreview';
+import AddTaskWindow from './AddTaskWindow';
 
 class Tasks extends Component {
 

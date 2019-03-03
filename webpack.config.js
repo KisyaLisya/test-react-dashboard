@@ -6,7 +6,7 @@ module.exports = {
   output: {
     path: path.join(__dirname, "/dist"),
     filename: "index-bundle.js",
-    publicPath: '/dist',
+    publicPath: '',
   },
   module: {
     rules: [
@@ -25,8 +25,8 @@ module.exports = {
     alias: {
       utils: path.resolve(__dirname, 'src/utils/'),
       styles: path.resolve(__dirname, 'src/styles/'),
-      components: path.resolve(__dirname, 'src/components/'),
-      app: path.resolve(__dirname, 'src/components/App/'),
+      components: path.resolve(__dirname, 'src/ui/'),
+      app: path.resolve(__dirname, 'src/App/'),
       store: path.resolve(__dirname, 'src/store/'),
       services: path.resolve(__dirname, 'src/services/')
     }

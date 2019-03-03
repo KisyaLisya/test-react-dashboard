@@ -2,8 +2,8 @@ import React from 'react';
 
 import './Dashboard.less';
 
-import Table from 'app/Table';
-import FilterPanel from 'app/FilterPanel';
+import Table from './Table';
+import FilterPanel from 'components/FilterPanel';
 
 const Dashboard = (props) => {
 	const { className = '' } = props;
