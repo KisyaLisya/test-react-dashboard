@@ -3,10 +3,12 @@ import { makeCurrentDate } from 'utils/dataFormers';
 
 export const UPDATE_TIME = 5; // update time in minutes
 
+const API_URL = 'http://localhost:3000';
+
 export default class ApiService {
 
   constructor(serverUrl) {
-    this.SERVER_URL = serverUrl ? serverUrl : 'http://localhost:3000'
+    this.SERVER_URL = serverUrl ? serverUrl : API_URL;
   }
 
   getFullUrl(url) {
