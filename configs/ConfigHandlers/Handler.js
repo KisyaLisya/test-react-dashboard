@@ -12,22 +12,19 @@ module.exports = class Handler {
   init(taskData, usersData) {
     this.makeUsers(usersData);
     this.makeTasks(taskData);
+    this.makeJsonServerData(taskData, usersData);
   }
 
   makeUsers(data) {
     const fileData = {
-      users: {
-        ...data
-      }
+      users: [...data]
     }
     this.writeFile('/users.json', fileData);
   }
 
   makeTasks(data) {
     const fileData = {
-      tasks: {
-        ...data
-      }
+      tasks: [...data]
     };
     this.writeFile('/tasks.json', fileData);
 
@@ -41,6 +38,15 @@ module.exports = class Handler {
         }
       });
     })
+  }
+
+  makeJsonServerData(taskData, usersData) {
+    const fileData = {
+      tasks: [...taskData],
+      users: [...usersData]
+    };
+
+    this.writeFile('/db.json', fileData);
   }
 
   makePathToFile(path) {

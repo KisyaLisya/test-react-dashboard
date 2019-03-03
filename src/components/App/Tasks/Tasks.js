@@ -3,13 +3,15 @@ import { connect } from "react-redux";
 
 import './Tasks.less';
 
+import { UPDATE_TIME } from 'services/ApiService';
 import { getMinutesDelay, isDef } from 'utils/Utils';
-import { getTasksLoading, getPerformedTasks, getTaskDataState } from 'store/selectors';
+import { getTasksLoading, getTaskDataLoading, getPerformedTasks, getTaskDataState } from 'store/selectors';
 import {
 	loadTasks,
 	loadTaskData,
-	saveTaskData,
+	onParsedData,
 	createNewTask,
+	saveTask,
 	closeTask
 } from 'store/actions';
 
@@ -32,7 +34,7 @@ class Tasks extends Component {
 		loadTasks();
 		this.refreshTimeout = setInterval(() => {
 			loadTasks();
-		}, getMinutesDelay(1));
+		}, getMinutesDelay(UPDATE_TIME));
 	}
 
 	componentWillUnmount() {
@@ -49,10 +51,12 @@ class Tasks extends Component {
 		const {
 			className = '',
 			loadingList = false,
+			loadingTask = false,
 			tasksList = [],
 			taskData = {},
-			saveTaskData,
+			onParsedData,
 			createNewTask,
+			saveTask,
 			closeTask
 		} = this.props;
 		const { data: { id: taskId = null } } = taskData;
@@ -60,9 +64,11 @@ class Tasks extends Component {
 		const previewPanel = getSidePanel(
 			taskId,
 			{
+				loadingTask,
 				taskData,
-				saveTaskData,
+				onParsedData,
 				createNewTask,
+				saveTask,
 				closeTask
 			}
 		);
@@ -91,9 +97,11 @@ class Tasks extends Component {
 
 function getSidePanel(taskId, props) {
 	const {
+		loadingTask,
 		taskData,
-		saveTaskData,
+		onParsedData,
 		createNewTask,
+		saveTask: onSaveTask,
 		closeTask
 	} = props;
 	let body = null;
@@ -101,9 +109,11 @@ function getSidePanel(taskId, props) {
 		body = (
 			<TaskPreview
 				className="Tasks-preview"
+				loading={loadingTask}
 				isEditing={taskId !== 'new'}
 				data={taskData}
-				onUpdate={saveTaskData}
+				onUpdate={onParsedData}
+				onSave={onSaveTask}
 				onClose={closeTask}
 			/>
 		);
@@ -121,6 +131,7 @@ function getSidePanel(taskId, props) {
 const mapStateToProps = state => {
 	return {
 		loadingList: getTasksLoading(state),
+		loadingTask: getTaskDataLoading(state),
 		tasksList: getPerformedTasks(state),
 		taskData: getTaskDataState(state)
 	}
@@ -128,5 +139,5 @@ const mapStateToProps = state => {
 
 export default connect(
 	mapStateToProps,
-	{ loadTasks, loadTaskData, saveTaskData, createNewTask, closeTask }
+	{ loadTasks, loadTaskData, onParsedData, createNewTask, saveTask, closeTask }
 )(Tasks);

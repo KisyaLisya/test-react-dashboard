@@ -2,10 +2,6 @@ import React, { Component } from 'react';
 
 import './TasksList.less';
 
-import { getMinutesDelay } from 'utils/Utils';
-import { getTasksLoading, getPerformedTasks } from 'store/selectors';
-import { loadTasks, loadTaskData } from 'store/actions';
-
 import NotFoundBlock from 'components/NotFoundBlock';
 import Spinner from 'components/Spinner';
 import TaskItem from './TaskItem';

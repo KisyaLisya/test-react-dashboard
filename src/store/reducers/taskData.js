@@ -1,7 +1,7 @@
 import {
   TASK_DATA_LOADING,
   TASK_DATA_LOADED,
-  SAVE_TASK,
+  UPDATE_TASK_STATUS,
   ADD_TASK,
   CLOSE_TASK
 } from '../actionTypes';
@@ -45,7 +45,7 @@ const taskData = (state = initialState, action) => {
         loaded: true,
         data: payload
       };
-    case SAVE_TASK:
+    case UPDATE_TASK_STATUS:
       return {
         ...state,
         loaded: false,

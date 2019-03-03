@@ -6,7 +6,9 @@
   "scripts": {
     "del_data": "rm -rf /data && mkdir -p data/tasks",
     "build_data": "npm run del_data && node ./configs/configDeploy.js",
-    "start": "webpack-dev-server --mode development --open --hot",
+    "start_api": "json-server --watch ./data/db.json",
+    "start_front": "webpack-dev-server --mode development --open --hot",
+    "start": "npm run start_front | npm run start_api",
     "build": "webpack --mode production"
   },
   "keywords": [],
@@ -29,6 +31,7 @@
   },
   "dependencies": {
     "fs": "0.0.1-security",
+    "json-server": "^0.14.2",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
     "react-redux": "^6.0.1",

@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 
 import './Table.less';
 
+import { UPDATE_TIME } from 'services/ApiService';
 import { getMinutesDelay } from 'utils/Utils';
 import { getTasksLoading, getPerformedTasks, getSortOptions } from 'store/selectors';
 import { loadTasks, toggleSortType, deleteTask } from 'store/actions';
@@ -24,7 +25,7 @@ class Table extends Component {
 		loadTasks();
 		this.refreshTimeout = setInterval(() => {
 			loadTasks();
-		}, getMinutesDelay(1));
+		}, getMinutesDelay(UPDATE_TIME));
 	}
 
 	componentWillUnmount() {
@@ -102,7 +103,7 @@ class Table extends Component {
 						/>
 						<TableHeadItem
 							id="actions"
-							className="align-middle _w125"
+							className="align-middle _w100"
 							value="Actions"
 							noSort
 						/>

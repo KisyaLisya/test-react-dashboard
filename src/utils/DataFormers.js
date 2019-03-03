@@ -143,9 +143,8 @@ export const formTasksList = (list) => {
     }, {});
 }
 
-export const formTaskData = (data) => {
-  const { id, task } = data;
-  const { status, priority, createdAt } = task;
+export const formTaskData = (task) => {
+  const { id, status, priority, createdAt } = task;
   return {
     id,
     ...task,
@@ -153,4 +152,46 @@ export const formTaskData = (data) => {
     priority: priority,
     createdAt: formTaksDate(createdAt),
   };
+}
+
+export const makeCurrentDate = () => {
+  const date = new Date();
+  const timezone = date.getTimezoneOffset() / 60;
+  const timezoneOffset = 4;
+
+  let yy = date.getFullYear();
+  let mm = date.getMonth() + 1;
+  let dd = date.getDate();
+  let hours = date.getHours() + timezone + 4;
+  let mins = date.getMinutes() + '';
+  let seconds = date.getSeconds() + '';
+
+  const isNextDay = hours > 23;
+  const isNextMonth = dd + 1 > 31 && isNextDay;
+  const isNextYear = mm + 1 > 12 && isNextMonth;
+  if (isNextDay) {
+    hours = hours - 24;
+    dd = dd + 1;
+  }
+  if (isNextMonth) {
+    dd = 1;
+    mm = mm + 1;
+  }
+  if (isNextYear) {
+    mm = 1;
+    yy = yy + 1;
+  }
+  hours += '';
+  dd += '';
+  mm += '';
+  yy += '';
+
+  mm = isDef(mm[1]) ? mm : '0' + mm;
+  dd = isDef(dd[1]) ? dd : '0' + dd;
+  hours = isDef(hours[1]) ? hours : '0' + hours;
+  mins = isDef(mins[1]) ? mins : '0' + mins;
+  seconds = isDef(seconds[1]) ? seconds : '0' + seconds;
+
+  const strDate = `${yy}${mm}${dd}`;
+  return Number(strDate);
 }

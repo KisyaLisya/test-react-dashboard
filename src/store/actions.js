@@ -13,7 +13,7 @@ import {
   ADD_TASK,
   DELETE_TASK,
   CLOSE_TASK,
-  SAVE_TASK
+  UPDATE_TASK_STATUS
 } from './actionTypes';
 import { isDef } from 'utils/Utils';
 import { formTasksList, formTaskData } from 'utils/DataFormers';
@@ -123,6 +123,20 @@ export const tasksLoaded = (tasks) => {
   }
 }
 
+export const saveTask = (taskData) => {
+  return (dispatch) => {
+    dispatch(taskDataLoading());
+    return Api.saveTask(taskData)
+      .then(
+        (task) => {
+          dispatch(loadTasks());
+          dispatch(closeTask(task));
+        },
+        (err) => console.log(err)
+      );
+  }
+}
+
 export const switchPage = (page) => {
   return {
     type: SWITCH_PAGE,
@@ -161,17 +175,25 @@ export const changeStatusFilter = (group, filter) => {
 }
 
 export const deleteTask = (id) => {
-  return {
-    type: DELETE_TASK,
-    payload: {
-      id
-    }
+  return (dispatch) => {
+    dispatch(tasksLoading());
+    return Api.deleteTask(id)
+      .then(
+        (tasks) => dispatch(loadTasks()),
+        (err) => console.log(err)
+      );
   }
+  // return {
+  //   type: DELETE_TASK,
+  //   payload: {
+  //     id
+  //   }
+  // }
 }
 
-export const saveTaskData = (data) => {
+export const onParsedData = (data) => {
   return {
-    type: SAVE_TASK,
+    type: UPDATE_TASK_STATUS,
     payload: {
       ...data
     }
@@ -185,8 +207,7 @@ export const createNewTask = () => {
   }
 }
 
-export const closeTask = () => {
-  console.log('closeTask');
+export const closeTask = (e) => {
   return {
     type: CLOSE_TASK,
     payload: null

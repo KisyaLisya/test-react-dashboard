@@ -45,6 +45,11 @@ export function getTasksLoading(store) {
   return state ? state.loading : false;
 }
 
+export function getTaskDataLoading(store) {
+  const state = getTaskDataState(store);
+  return state ? state.loading : false;
+}
+
 export function getMenu(store) {
   const state = getMenuState(store);
   return state ? state.menu : [];

@@ -9,7 +9,6 @@ import {
   HOURS_OPTIONS as hoursOptions
 } from 'utils/constants';
 import { isDef } from 'utils/Utils';
-import { saveTaskData } from 'store/actions';
 
 import ActionButton from 'components/ActionButton';
 import Badge from 'components/Badge';
@@ -18,6 +17,7 @@ import Button from 'components/Button';
 import Input from 'components/Input';
 import Textarea from 'components/Textarea';
 import Select from 'components/Select';
+import Spinner from 'components/Spinner';
 
 class TaskPreview extends Component {
 
@@ -157,10 +157,10 @@ class TaskPreview extends Component {
   }
 
   onSave() {
-    const { saveTaskData } = this.props;
+    const { onSave } = this.props;
     const { taskData } = this.state;
 
-    saveTaskData({
+    onSave({
       saved: true,
       ...taskData
     });
@@ -169,6 +169,7 @@ class TaskPreview extends Component {
   render() {
     const {
       className = '',
+      loading = false,
       isEditing = false,
       onClose
     } = this.props;
@@ -190,6 +191,16 @@ class TaskPreview extends Component {
         description = ''
       }
     } = this.state;
+
+    if (loading) {
+      return (
+        <div
+          className={`TaskPreview modal-content border-primary ${className}`}
+        >
+          <Spinner />
+        </div>
+      );
+    }
 
     let header = null;
 

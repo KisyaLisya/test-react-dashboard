@@ -11,7 +11,7 @@ export const TASK_DATA_LOADING = "TASK_DATA_LOADING";
 export const TASK_DATA_LOADED = "TASK_DATA_LOADED";
 
 export const PREVIEW_TASK = "PREVIEW_TASK";
-export const SAVE_TASK = "SAVE_TASK";
+export const UPDATE_TASK_STATUS = "UPDATE_TASK_STATUS";
 export const ADD_TASK = "ADD_TASK";
 export const CLOSE_TASK = "CLOSE_TASK";
 export const EDIT_TASK = "EDIT_TASK";

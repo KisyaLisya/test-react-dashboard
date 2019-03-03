@@ -42,12 +42,7 @@ const TableItem = ({ className = '', data, actions }) => {
 			<td className="align-middle">
 				{task}
 			</td>
-			<td className="align-middle">
-				<ActionButton
-					className="btn-outline-info mr-1"
-					icon="fa-pencil"
-					onClick={() => editAction(id)}
-				/>
+			<td className="align-middle text-center">
 				<ActionButton
 					className="btn-outline-danger"
 					icon="fa-trash-o"
