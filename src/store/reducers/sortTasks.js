@@ -1,8 +1,12 @@
-import { SET_SORT } from '../actionTypes';
+import { SET_SORT, SWITCH_PAGE } from '../actionTypes';
 
-const initialState = {
+const defaultState = {
   id: 'createdAt',
   type: true
+}
+
+const initialState = {
+  ...defaultState
 };
 
 const sortTasks = (state = initialState, action) => {
@@ -10,11 +14,15 @@ const sortTasks = (state = initialState, action) => {
 
   switch (type) {
     case SET_SORT:
-    const isIdChanged = state.id !== payload.id
+      const isIdChanged = state.id !== payload.id
       return {
         id: payload.id,
         type: isIdChanged ? true : !payload.type,
-      }
+      };
+    case SWITCH_PAGE:
+      return {
+        ...defaultState
+      };
     default:
       return state;
   }

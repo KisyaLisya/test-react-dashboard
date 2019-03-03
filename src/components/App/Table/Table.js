@@ -23,7 +23,6 @@ class Table extends Component {
 
 		loadTasks();
 		this.refreshTimeout = setInterval(() => {
-			console.log('reloading...');
 			loadTasks();
 		}, getMinutesDelay(1));
 	}
@@ -33,7 +32,7 @@ class Table extends Component {
 	}
 
 	render() {
-		const { loading = true, data = [], sortOptions = {}, toggleSortType, deleteTask } = this.props;
+		const { loading = false, data = [], sortOptions = {}, toggleSortType, deleteTask } = this.props;
 		const items = data.map((el) => {
 			const actions = {
 				editAction: (id) => console.log(id),
@@ -120,7 +119,6 @@ class Table extends Component {
 const mapStateToProps = state => {
 	return {
 		loading: getTasksLoading(state),
-		// loading: true,
 		data: getPerformedTasks(state),
 		sortOptions: getSortOptions(state)
 	}

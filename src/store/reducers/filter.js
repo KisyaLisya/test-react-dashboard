@@ -1,4 +1,4 @@
-import { SET_SEARCH_FILTER, SET_FILTER_STATUS } from '../actionTypes';
+import { SET_SEARCH_FILTER, SET_FILTER_STATUS, SWITCH_PAGE } from '../actionTypes';
 import { STATUS_FILTERS } from 'utils/constants';
 
 const initialState = {
@@ -19,6 +19,12 @@ const Filter = (state = initialState, action) => {
       return {
         ...state,
         statusFilter: payload.filter
+      }
+    case SWITCH_PAGE:
+      return {
+        ...state,
+        searchFilter: '',
+        statusFilter: STATUS_FILTERS.byIds.ALL
       }
     default:
       return state;

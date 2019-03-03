@@ -12,16 +12,6 @@ import RadioButtonGroup from 'components/RadioButtonGroup';
 
 class FilterPanel extends Component {
 
-	componentWillUnmount() {
-		const {
-			changeSearchFilter,
-			changeStatusFilter
-		} = this.props;
-
-		changeSearchFilter('');
-		changeStatusFilter(null, 'all');
-	}
-
 	render() {
 		const {
 			className = '',

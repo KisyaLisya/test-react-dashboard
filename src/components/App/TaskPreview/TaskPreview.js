@@ -9,7 +9,6 @@ import {
   HOURS_OPTIONS as hoursOptions
 } from 'utils/constants';
 import { isDef } from 'utils/Utils';
-import { getTaskDataState } from 'store/selectors';
 import { saveTaskData } from 'store/actions';
 
 import Badge from 'components/Badge';
@@ -31,11 +30,11 @@ class TaskPreview extends Component {
         name: '',
         status: '0',
         priority: '0',
-        dateRequired: {
+        requiredDate: {
           days: '0d',
           hours: '0h'
         },
-        datePromised: {
+        promisedDate: {
           days: '0d',
           hours: '0h'
         },
@@ -51,7 +50,7 @@ class TaskPreview extends Component {
       data = {}
     } = this.props;
 
-    const { loaded = false, saved = false, ...options} = data;
+    const { loading = false, saved = false, data: options } = data;
 
     this.updateStateData(options);
   }
@@ -59,18 +58,16 @@ class TaskPreview extends Component {
   componentDidUpdate() {
     const {
       data = {},
-      saveTaskData
+      onUpdate
     } = this.props;
-    const {  } = this.props;
     const { taskData } = this.state;
-    const { loaded = false, saved = false,  ...options} = data;
+    const { loading = false, loaded = false, data: options } = data;
 
-    if (saved) {
+    if (loaded) {
       this.updateStateData(options);
 
-      saveTaskData({
-        saved: false,
-        ...taskData
+      onUpdate({
+        loaded: false,
       });
     }
   }
@@ -88,12 +85,13 @@ class TaskPreview extends Component {
   }
 
   updateStateData(data) {
+    if (!data.id) return;
 
     this.setState({
       headlineName: data.name,
       headlineStatus: data.status,
       taskData: {
-        ...this.state,
+        ...this.state.taskData,
         ...data
       }
     })
@@ -138,19 +136,19 @@ class TaskPreview extends Component {
   }
 
   onChangeRequiredDays(e) {
-    this.onChangeFunc(e, 'days', 'dateRequired');
+    this.onChangeFunc(e, 'days', 'requiredDate');
   }
 
   onChangeRequiredHours(e) {
-    this.onChangeFunc(e, 'hours', 'dateRequired');
+    this.onChangeFunc(e, 'hours', 'requiredDate');
   }
 
   onChangePromisedDays(e) {
-    this.onChangeFunc(e, 'days', 'datePromised');
+    this.onChangeFunc(e, 'days', 'promisedDate');
   }
 
   onChangePromisedHours(e) {
-    this.onChangeFunc(e, 'hours', 'datePromised');
+    this.onChangeFunc(e, 'hours', 'promisedDate');
   }
 
   onChangeDescription(e) {
@@ -170,7 +168,7 @@ class TaskPreview extends Component {
   render() {
     const {
       className = '',
-      isEditing = true
+      isEditing = false
     } = this.props;
     const {
       headlineName = '',
@@ -179,11 +177,11 @@ class TaskPreview extends Component {
         name: stateName = '',
         status = '0',
         priority = '1',
-        dateRequired: {
+        requiredDate: {
           days: daysRequired = '0d',
           hours: hoursRequired = '0h'
         },
-        datePromised: {
+        promisedDate: {
           days: daysPromised = '0d',
           hours: hoursPromised = '0h'
         },
@@ -192,6 +190,8 @@ class TaskPreview extends Component {
     } = this.state;
 
     let header = null;
+
+    console.log(isEditing)
 
     if (isEditing) {
       const statusObj = statusList.find((el) => el.id == headlineStatus);
@@ -331,13 +331,4 @@ class TaskPreview extends Component {
   }
 }
 
-const mapStateToProps = state => {
-	return {
-		data: getTaskDataState(state),
-	}
-}
-
-export default connect(
-  mapStateToProps,
-  { saveTaskData }
-)(TaskPreview);
+export default TaskPreview;

@@ -2,6 +2,8 @@
 @import "~styles/variables.less";
 
 .TasksList {
+  position: relative;
+
   overflow-y: auto;
 
   border: 1px solid @mint;
@@ -17,5 +19,12 @@
   &::-webkit-scrollbar-thumb {
   	background: lighten(@mint, 15%);
   	border-radius: 0.25rem;
+  }
+
+  &-error {
+    position: relative;
+    flex-grow: 1;
+    
+    height: 200px;
   }
 }

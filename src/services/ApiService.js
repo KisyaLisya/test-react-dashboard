@@ -27,6 +27,11 @@ export default class ApiService {
     return makeTaskList(res.tasks);
   }
 
+  async getTaskById(id) {
+    const res = await this.getRequest(`/tasks/${id}.json`);
+    return res;
+  }
+
 }
 //
 function makeTaskList(data) {

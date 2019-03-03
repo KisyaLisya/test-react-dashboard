@@ -142,3 +142,15 @@ export const formTasksList = (list) => {
       }
     }, {});
 }
+
+export const formTaskData = (data) => {
+  const { id, task } = data;
+  const { status, priority, createdAt } = task;
+  return {
+    id,
+    ...task,
+    status: status,
+    priority: priority,
+    createdAt: formTaksDate(createdAt),
+  };
+}

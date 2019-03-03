@@ -1,32 +1,37 @@
-import { SAVE_TASK, LOAD_TASK } from '../actionTypes';
+import {
+  TASK_DATA_LOADING,
+  TASK_DATA_LOADED,
+  SAVE_TASK
+} from '../actionTypes';
 
 const initialState = {
-  loaded: false,
+  loading: false,
   saved: false,
-  id: 0,
-  name: 'Task name number 222',
-  status: '1',
-  priority: '',
-  dateRequired: {
-    days: '5d',
-    hours: '2h'
-  },
-  datePromised: {
-    days: '6d',
-    hours: '4h'
-  },
-  description: 'Thats best description. SOOOOO MUCH WORDSSSSSSSSSSSSSSs',
+  loaded: false,
+  data: {}
 }
 
 const taskData = (state = initialState, action) => {
   const { type = '', payload } = action;
 
   switch (type) {
+    case TASK_DATA_LOADING:
+      return {
+        ...state,
+        loading: true,
+      };
+    case TASK_DATA_LOADED:
+      console.log('LOADED', state, payload);
+      return {
+        ...state,
+        loading: false,
+        loaded: true,
+        data: payload
+      };
     case SAVE_TASK:
       return {
         ...state,
-        saved: true,
-        ...payload
+        loaded: false,
       };
     default:
       return state;

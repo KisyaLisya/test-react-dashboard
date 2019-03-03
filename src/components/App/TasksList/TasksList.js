@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
-import { connect } from "react-redux";
 
 import './TasksList.less';
 
-import { getPerformedTasks } from 'store/selectors';
+import { getMinutesDelay } from 'utils/Utils';
+import { getTasksLoading, getPerformedTasks } from 'store/selectors';
+import { loadTasks, loadTaskData } from 'store/actions';
 
+import NotFoundBlock from 'components/NotFoundBlock';
+import Spinner from 'components/Spinner';
 import TaskItem from './TaskItem';
 
 class TasksList extends Component {
@@ -12,34 +15,41 @@ class TasksList extends Component {
 	render() {
 		const {
 			className = '',
-			list = []
+			selectedTask = null,
+			list = [],
+			loading = false,
+			onSelect
 		} = this.props;
+
+		if (loading) {
+			return(
+				<div className="TasksList-error">
+					<Spinner />
+				</div>
+			);
+		}
 
 		const items = list.map((el) => {
 			return(
 				<TaskItem
 					key={el.id}
+					id={el.id}
+					active={el.id === selectedTask}
 					name={el.task}
 					status={el.status[1]}
+					onClick={onSelect}
 				/>
 			)
 		})
 
 		return(
 			<ul className={`TasksList list-group ${className}`}>
-				{items}
+				{items.length > 0 ? items : (
+					<NotFoundBlock />
+				)}
 			</ul>
 		);
 	}
 }
 
-const mapStateToProps = state => {
-	return {
-		list: getPerformedTasks(state),
-	}
-}
-
-export default connect(
-	mapStateToProps,
-	null
-)(TasksList);
+export default TasksList;

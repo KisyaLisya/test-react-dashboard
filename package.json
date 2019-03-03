@@ -4,6 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "del_data": "rm -rf /data && mkdir -p data/tasks",
+    "build_data": "npm run del_data && node ./configs/configDeploy.js",
     "start": "webpack-dev-server --mode development --open --hot",
     "build": "webpack --mode production"
   },

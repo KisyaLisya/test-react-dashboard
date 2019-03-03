@@ -8,8 +8,11 @@ import Badge from 'components/Badge';
 const TaskItem = (props) => {
   const {
     className = '',
+    id = 0,
+    active=false,
     name = '',
     status = 'todo',
+    onClick
   } = props;
 
 	const statusName = status
@@ -19,7 +22,11 @@ const TaskItem = (props) => {
 
   return(
     <li
-      className={`TaskItem list-group-item list-group-item-action ${className}`}
+      className={`
+        TaskItem list-group-item list-group-item-action ${className}
+        ${active ? 'active' : ''}
+        `}
+      onClick={() => onClick(id)}
     >
       <Badge
         className="TaskItem-status"

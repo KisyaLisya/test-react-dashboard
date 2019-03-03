@@ -10,13 +10,27 @@ module.exports = class Handler {
   }
 
   init(data) {
+    this.makeTasks(data);
+  }
+
+  makeTasks(data) {
     const fileData = {
       tasks: {
         ...data
       }
     };
-    const loggerCallback = this.logger.log.bind(this.logger, 'SuccessfullyDictionary configured')
-    this.writeFile('/tasks.json', fileData, loggerCallback);
+    this.writeFile('/tasks.json', fileData);
+
+    data.forEach((el) => {
+      const { id, ...options } = el;
+      const path = `/tasks/${id}.json`;
+      this.writeFile(path, {
+        id: id,
+        task: {
+          ...options
+        }
+      });
+    })
   }
 
   makePathToFile(path) {
