@@ -1,1 +1,1 @@
-worker: npm run prod_server
+web: npm run prod_server
