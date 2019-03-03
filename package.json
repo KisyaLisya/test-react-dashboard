@@ -9,7 +9,8 @@
     "start_api": "json-server --watch ./data/db.json",
     "start_front": "webpack-dev-server --mode development --open --hot",
     "start": "npm run start_front | npm run start_api",
-    "build": "webpack --mode production"
+    "build": "webpack --mode production",
+    "postinstall": "npm run build"
   },
   "keywords": [],
   "author": "",
